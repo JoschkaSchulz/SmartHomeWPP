@@ -25,22 +25,22 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLight = new DirectionalLight(1f, 0.2f, 1.0f);
 		mLight.setPower(2);
 		
-	    mMaterial = new DiffuseMaterial();		
-		mMaterial.setUseColor(true);
-		Max3DSParser objParser = new Max3DSParser(this, R.raw.livingplace);
+	    Max3DSParser objParser = new Max3DSParser(this, R.raw.livingplace);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		mLivingPlace.addLight(mLight); 
 
 		addChild(mLivingPlace);
 		
+		mMaterial = new DiffuseMaterial();		
+		mMaterial.setUseColor(true);
 		mLivingPlace.setMaterial(mMaterial);
-		mLivingPlace.setColor(0xffcccccc);
+		mLivingPlace.setColor(0xffff0000);
 		
 		mLivingPlace.setRotY(180);
 		mLivingPlace.setRotZ(90);
 
-		mCamera.setZ(-4.0f);
+		mCamera.setZ(-5.0f);
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -49,8 +49,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
+//		mCamera.setZ(mCamera.getZ() + 0.01f);
 //		mCamera.setRotY(mCamera.getRotY() + 1);
 //		mLivingPlace.setRotZ(mLivingPlace.getRotZ() + 1);
-		mLivingPlace.setRotY(mLivingPlace.getRotY() + 2);
+//		mLivingPlace.setRotY(mLivingPlace.getRotY() + 2);
 	}
 }
