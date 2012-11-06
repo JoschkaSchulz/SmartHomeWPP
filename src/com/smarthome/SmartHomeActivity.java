@@ -39,6 +39,17 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	public boolean onTouch(View v, MotionEvent event) {
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
 			System.out.println("TOUCH! x:"+event.getX()+" y:"+event.getY());
+			if(event.getX() > 400) {
+				mRenderer.moveLP(-0.5f, 0.0f);
+			}else if(event.getX() < 50) {
+				mRenderer.moveLP(0.5f, 0.0f);
+			}
+			
+			if(event.getY() > 600) {
+				mRenderer.moveLP(0.0f, 0.5f);
+			}else if(event.getY() < 50) {
+				mRenderer.moveLP(0.0f, -0.5f);
+			}
 		}
 		if(event.getAction() == MotionEvent.ACTION_MOVE) {
 			System.out.println("Moved!");

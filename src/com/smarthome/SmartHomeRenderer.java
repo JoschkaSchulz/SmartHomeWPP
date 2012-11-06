@@ -28,6 +28,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	    Max3DSParser objParser = new Max3DSParser(this, R.raw.livingplace);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
+		mLivingPlace.setScale(10.0f);
 		mLivingPlace.addLight(mLight); 
 
 		addChild(mLivingPlace);
@@ -38,9 +39,11 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.setColor(0xffff0000);
 		
 		mLivingPlace.setRotY(180);
-		mLivingPlace.setRotZ(90);
+//		mLivingPlace.setRotZ(90);
 
-		mCamera.setZ(-5.0f);
+		mCamera.setZ(-20.0f);
+//		mCamera.setRotX(mCamera.getRotX() - 90);
+		
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -53,5 +56,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 //		mCamera.setRotY(mCamera.getRotY() + 1);
 //		mLivingPlace.setRotZ(mLivingPlace.getRotZ() + 1);
 //		mLivingPlace.setRotY(mLivingPlace.getRotY() + 2);
+	}
+	
+	public void moveLP(float x,float y) {
+		mLivingPlace.setPosition(mLivingPlace.getX()+x, mLivingPlace.getY()+y, mLivingPlace.getZ());
 	}
 }
