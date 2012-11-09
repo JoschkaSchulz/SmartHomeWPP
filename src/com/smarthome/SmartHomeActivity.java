@@ -1,8 +1,10 @@
 package com.smarthome;
 
 import rajawali.RajawaliActivity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.text.method.Touch;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,11 +14,25 @@ import android.widget.TextView;
 
 public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener {
 
+	
+	public static int screenWidth;
+	public static int screenHeight;
 	private SmartHomeRenderer mRenderer;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	
+    	Display display = getWindowManager().getDefaultDisplay();
+    	Point size = new Point();
+    	display.getSize(size);
+    	screenHeight = size.y;
+    	screenWidth = size.x;
+    	
+    	System.out.println("--SCREEN--");
+    	System.out.println("Width: "+screenWidth);
+    	System.out.println("Height: "+screenHeight);
+    	
     	mRenderer = new SmartHomeRenderer(this);
     	mRenderer.setSurfaceView(mSurfaceView);
     	super.setRenderer(mRenderer);

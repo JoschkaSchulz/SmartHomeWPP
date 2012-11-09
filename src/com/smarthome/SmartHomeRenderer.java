@@ -132,6 +132,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		}else{
 			testLightsCounter = 0;
 		}
+		
+		
 	}
 	
 	public Camera getCamera() {
