@@ -1,1 +1,4 @@
-bin/AndroidManifest.xml bin/classes bin/com.smarthome.SmartHomeActivity.apk bin/res
+bin/AndroidManifest.xml
+bin/classes
+bin/com.smarthome.SmartHomeActivity.apk
+bin/res
