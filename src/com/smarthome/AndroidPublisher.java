@@ -3,7 +3,7 @@
  * HAW Hamburg
  * 03.2012 Hamburg
 ***************************************************/
-package de.hawhamburg.livingplace.messaging.android;
+package com.smarthome;
 
 import java.io.IOException;
 import java.io.PrintWriter;
