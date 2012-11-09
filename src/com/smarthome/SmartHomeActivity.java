@@ -17,7 +17,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	
 	public static int screenWidth;
 	public static int screenHeight;
-	private SmartHomeRenderer mRenderer;
+	public SmartHomeRenderer mRenderer;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -8,6 +8,6 @@ public class RoomGesture extends Gesture {
 		this.room = room;
 	}
 	public void click(SmartHomeActivity activity) {
-		
+		activity.mRenderer.room = room;
 	}
 }

@@ -29,6 +29,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private ToonMaterial mToonMaterial;
 	private PhongMaterial mPhongMaterial;
 	
+	public Room room;
 	private LinkedList<Room> rooms;
 	
 	private BaseObject3D windowButton1, windowButton2,windowButton3;
