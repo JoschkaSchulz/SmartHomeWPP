@@ -12,9 +12,9 @@ public class sendMessageToProxy extends AsyncTask {
 	@Override
 	protected Object doInBackground(Object... params) {
 		try {
-			AndroidPublisher publisher = new AndroidPublisher(params[0],
-					Integer.valueOf(params[1]), params[2]);
-			publisher.setMessage(params[4]);
+			AndroidPublisher publisher = new AndroidPublisher((String)params[0],
+					Integer.valueOf((String)params[1]), (String)params[2]);
+			publisher.setMessage((String)params[4]);
 			if (params[3].equals("topic")) {
 				publisher.publishToTopic();
 			} else {
