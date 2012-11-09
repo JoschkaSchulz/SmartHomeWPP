@@ -14,7 +14,6 @@ public class LightGesture extends Gesture {
 		System.out.println("Light "+(on ? "on" : "off"));
 		on = !on;
 		sendMessageToProxy send = new sendMessageToProxy();
-		send.doInBackground("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));
-		
+		send.doInBackground("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
 	}
 }
