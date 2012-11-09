@@ -84,11 +84,13 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private void setUpRooms() {
 		rooms = new LinkedList<Room>();
 		
+		//Füge Räume hinzu
 		rooms.add(new Room(-2.5f, 4.5f));
 		rooms.add(new Room(5.0f, 5.0f));
 		rooms.add(new Room(-1.5f, -4.0f));
 		rooms.add(new Room(11.0f, 5.0f));
 		
+		//Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
 		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
 
@@ -100,6 +102,12 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms.get(2).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
 		
 		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
+		
+		//Füge die Lichtsteuerung hinzu
+		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light_color"));
+		rooms.get(1).gestures.add(new LightGesture(100,100,700,380, "kitchen_light_color"));
+		rooms.get(2).gestures.add(new LightGesture(100,100,700,380, "lounge_light_color"));
+		rooms.get(3).gestures.add(new LightGesture(100,100,700,380, "sleeping_light_color"));
 		
 		this.room = rooms.get(0);
 	}
