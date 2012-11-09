@@ -88,8 +88,18 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms.add(new Room(5.0f, 5.0f));
 		rooms.add(new Room(-1.5f, -4.0f));
 		rooms.add(new Room(11.0f, 5.0f));
+		
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
 		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));
+		
+		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		
+		rooms.get(0).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(2)));
+		rooms.get(0).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(2)));
+		
+		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));
+		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
 		
 		this.room = rooms.get(0);
 	}
