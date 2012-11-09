@@ -5,8 +5,8 @@ public abstract class Gesture {
 	public boolean match(float x, float y) {
 		return x > x1 && x < x2 && y > y1 && y < y2;
 	}
-	public void fire(float x, float y) {
-		if (match(x, y)) click();
+	public void fire(float x, float y, SmartHomeActivity activity) {
+		if (match(x, y)) click(activity);
 	}
-	public abstract void click();
+	public abstract void click(SmartHomeActivity activity);
 }
