@@ -6,43 +6,85 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 
 import rajawali.BaseObject3D;
+import rajawali.Camera;
 import rajawali.lights.DirectionalLight;
+import rajawali.lights.PointLight;
+import rajawali.materials.CubeMapMaterial;
 import rajawali.materials.DiffuseMaterial;
+import rajawali.materials.PhongMaterial;
+import rajawali.materials.ToonMaterial;
 import rajawali.parser.Max3DSParser;
+import rajawali.parser.ObjParser;
+import rajawali.primitives.Cube;
 import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {
 	private DirectionalLight mLight;
+	private PointLight mLight2, mLight3, mLight4, mLight5;
+	
 	private BaseObject3D mLivingPlace;
 	private DiffuseMaterial mMaterial;
+	private ToonMaterial mToonMaterial;
+	private PhongMaterial mPhongMaterial;
+	
+	private BaseObject3D windowButton1, windowButton2,windowButton3;
+	private BaseObject3D lightButton1, lightButton2,lightButton3;
 	
 	public SmartHomeRenderer(Context context) {
 		super(context);
-		setFrameRate(30);
+		setFrameRate(50);
+	}
+	
+	private void setUpLights() {
+		mLight = new DirectionalLight(1f, 0.2f, 1.0f);
+		mLight.setPower(1); 
+		
+		mLight2 = new PointLight();
+		mLight2.setPosition(9.5f, 5.0f, -5f);
+		mLight2.setPower(0);
+		
+		mLight3 = new PointLight();
+		mLight3.setPosition(2.0f, 7.5f, -5f);
+		mLight3.setPower(0);
+		
+		mLight4 = new PointLight();
+		mLight4.setPosition(-3.5f, 7.5f, -5f);
+		mLight4.setPower(0);
+		
+		mLight5 = new PointLight();
+		mLight5.setPosition(-1.5f, -2.5f, -5f);
+		mLight5.setPower(0);
+	}
+	
+	private void setUpLivingPlaceModel() {
+		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_obj);
+		objParser.parse();
+		mLivingPlace = objParser.getParsedObject();
+		
+//		mLivingPlace.addLight(mLight);	//Add this light for a brighter model
+		mLivingPlace.addLight(mLight2);	//Light(Wohnzimmer)
+		mLivingPlace.addLight(mLight3);	//Light(Küche)
+		mLivingPlace.addLight(mLight4);	//Light(Esszimmer)
+		mLivingPlace.addLight(mLight5);	//Light(Schlafzimmer)
+		
+		addChild(mLivingPlace);
+		mLivingPlace.setScale(10.0f);
+
+		mMaterial = new DiffuseMaterial();
+		mMaterial.setUseColor(true);
+		mLivingPlace.setMaterial(mMaterial);
+		mLivingPlace.setColor(0xff666666);
 	}
 	
 	public void initScene() {
-		mLight = new DirectionalLight(1f, 0.2f, 1.0f);
-		mLight.setPower(2);
+		this.setUpLights();
 		
-	    Max3DSParser objParser = new Max3DSParser(this, R.raw.livingplace);
-		objParser.parse();
-		mLivingPlace = objParser.getParsedObject();
-		mLivingPlace.setScale(10.0f);
-		mLivingPlace.addLight(mLight); 
-
-		addChild(mLivingPlace);
-		
-		mMaterial = new DiffuseMaterial();		
-		mMaterial.setUseColor(true);
-		mLivingPlace.setMaterial(mMaterial);
-		mLivingPlace.setColor(0xffff0000);
+		this.setUpLivingPlaceModel();
 		
 		mLivingPlace.setRotY(180);
-//		mLivingPlace.setRotZ(90);
+		mLivingPlace.setRotX(90);
 
-		mCamera.setZ(-20.0f);
-//		mCamera.setRotX(mCamera.getRotX() - 90);
+		mCamera.setZ(-15.0f);
 		
 	}
 	
@@ -52,10 +94,36 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-//		mCamera.setZ(mCamera.getZ() + 0.01f);
-//		mCamera.setRotY(mCamera.getRotY() + 1);
-//		mLivingPlace.setRotZ(mLivingPlace.getRotZ() + 1);
-//		mLivingPlace.setRotY(mLivingPlace.getRotY() + 2);
+		this.testLights();
+	}
+	
+	private float testLightsCounter = 0;
+	public void testLights() {
+		float tlc = testLightsCounter ++;
+		
+		if(tlc <= 200) {
+			this.mLight2.setPower(tlc/50);
+		}else if(tlc > 200 && tlc <= 400) {
+			this.mLight2.setPower(4.00f-(tlc-200)/50);
+			this.mLight3.setPower((tlc-200)/50);
+			this.mLight4.setPower((tlc-200)/50);
+		}else if(tlc > 400 && tlc <= 600) {
+			this.mLight3.setPower(4.00f-(tlc-400)/50);
+			this.mLight4.setPower(4.00f-(tlc-400)/50);
+			this.mLight5.setPower((tlc-400)/50);
+		}else if(tlc > 600 && tlc <= 800){
+			this.mLight5.setPower(4.00f-(tlc-600)/50);
+		}else{
+			testLightsCounter = 0;
+		}
+	}
+	
+	public Camera getCamera() {
+		return this.mCamera;
+	}
+	
+	public void cameraToRoom() {
+		
 	}
 	
 	public void moveLP(float x,float y) {

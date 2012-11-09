@@ -1,0 +1,12 @@
+# Blender MTL File: 'livingplace.blend'
+# Material Count: 1
+newmtl Material.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.266700 0.266700 0.266700
+Ks 0.196036 0.196036 0.196036
+Ni 1.000000
+d 1.000000
+illum 2
+
+
