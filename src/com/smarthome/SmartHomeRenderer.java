@@ -1,5 +1,7 @@
 package com.smarthome;
 
+import java.util.LinkedList;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -26,6 +28,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private DiffuseMaterial mMaterial;
 	private ToonMaterial mToonMaterial;
 	private PhongMaterial mPhongMaterial;
+	
+	private LinkedList<Room> rooms;
 	
 	private BaseObject3D windowButton1, windowButton2,windowButton3;
 	private BaseObject3D lightButton1, lightButton2,lightButton3;
@@ -76,10 +80,22 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.setColor(0xff666666);
 	}
 	
+	private void setUpRooms() {
+		rooms = new LinkedList<Room>();
+		
+		rooms.add(new Room(11.0f, 5.0f));
+		rooms.add(new Room(5.0f, 5.0f));
+		rooms.add(new Room(-2.5f, 4.5f));
+		rooms.add(new Room(-2.5f, 4.5f));
+		rooms.add(new Room(-1.5f, -4.0f));
+	}
+	
 	public void initScene() {
 		this.setUpLights();
 		
 		this.setUpLivingPlaceModel();
+		
+		this.setUpRooms();
 		
 		mLivingPlace.setRotY(180);
 		mLivingPlace.setRotX(90);
@@ -116,6 +132,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		}else{
 			testLightsCounter = 0;
 		}
+		
+		
 	}
 	
 	public Camera getCamera() {
