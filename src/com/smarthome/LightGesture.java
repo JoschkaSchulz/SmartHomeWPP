@@ -13,7 +13,12 @@ public class LightGesture extends Gesture {
 	public void click(SmartHomeActivity activity) {
 		System.out.println("Light "+(on ? "on" : "off"));
 		on = !on;
-		sendMessageToProxy send = new sendMessageToProxy();
-		send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
+		try {
+			sendMessageToProxy send = new sendMessageToProxy();
+			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
+		} catch(Exception e) {
+			System.out.println("Senden Fehlgeschlagen");
+			on = !on;
+		}
 	}
 }
