@@ -41,19 +41,19 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		mLight2 = new PointLight();
 		mLight2.setPosition(9.5f, 5.0f, -5f);
-		mLight2.setPower(0);
+		mLight2.setPower(2);
 		
 		mLight3 = new PointLight();
 		mLight3.setPosition(2.0f, 7.5f, -5f);
-		mLight3.setPower(0);
+		mLight3.setPower(2);
 		
 		mLight4 = new PointLight();
 		mLight4.setPosition(-3.5f, 7.5f, -5f);
-		mLight4.setPower(0);
+		mLight4.setPower(2);
 		
 		mLight5 = new PointLight();
 		mLight5.setPosition(-1.5f, -2.5f, -5f);
-		mLight5.setPower(0);
+		mLight5.setPower(2);
 	}
 	
 	private void setUpLivingPlaceModel() {
@@ -94,7 +94,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-		this.testLights();
+		//this.testLights();
 	}
 	
 	private float testLightsCounter = 0;
