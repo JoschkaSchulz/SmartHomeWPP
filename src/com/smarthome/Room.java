@@ -3,7 +3,7 @@ package com.smarthome;
 import java.util.LinkedList;
 
 public class Room {
-	public float x, y;
+	private float x, y;
 	public LinkedList<Gesture> gestures = new LinkedList<Gesture>();
 	
 	public Room(float x, float y) {
@@ -15,5 +15,13 @@ public class Room {
 		for (Gesture gesture: gestures) {
 			gesture.fire(x, y, activity);
 		}
+	}
+	
+	public float getX() {
+		return x;
+	}
+	
+	public float getY() {
+		return y;
 	}
 }

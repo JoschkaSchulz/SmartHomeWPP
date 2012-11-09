@@ -84,11 +84,14 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private void setUpRooms() {
 		rooms = new LinkedList<Room>();
 		
-		rooms.add(new Room(11.0f, 5.0f));
+		rooms.add(new Room(-2.5f, 4.5f));
 		rooms.add(new Room(5.0f, 5.0f));
-		rooms.add(new Room(-2.5f, 4.5f));
-		rooms.add(new Room(-2.5f, 4.5f));
 		rooms.add(new Room(-1.5f, -4.0f));
+		rooms.add(new Room(11.0f, 5.0f));
+		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
+		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));
+		
+		this.room = rooms.get(0);
 	}
 	
 	public void initScene() {
@@ -111,7 +114,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-		//this.testLights();
+		
+		this.getCamera().setPosition(this.room.getX(), this.room.getY(), -15.0f);
 	}
 	
 	private float testLightsCounter = 0;
@@ -139,10 +143,6 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public Camera getCamera() {
 		return this.mCamera;
-	}
-	
-	public void cameraToRoom() {
-		
 	}
 	
 	public void moveLP(float x,float y) {
