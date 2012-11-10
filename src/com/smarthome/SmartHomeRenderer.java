@@ -23,7 +23,7 @@ import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {
 	private DirectionalLight mLight;
-	private PointLight mLight0, mLight1, mLight2, mLight3;
+	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
 	private DiffuseMaterial mMaterial;
@@ -56,6 +56,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		mLight3 = new PointLight();
 		mLight3.setPower(0);
+		
+		mLight4 = new PointLight();
+		mLight4.setPower(0);
 	}
 	
 	private void setUpLivingPlaceModel() {
@@ -68,6 +71,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.addLight(mLight1);	//Light(Küche)
 		mLivingPlace.addLight(mLight2);	//Light(Esszimmer)
 		mLivingPlace.addLight(mLight3);	//Light(Schlafzimmer)
+		mLivingPlace.addLight(mLight4);	//Light(Korridor)
 		
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(10.0f);
@@ -90,6 +94,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	public void setLight3(boolean on) {
 		mLight3.setPower(on ? 2 : 0);
 	}
+	public void setLight4(boolean on) {
+		mLight4.setPower(on ? 2 : 0);
+	}
 	
 	private void setUpRooms() {
 		rooms = new LinkedList<Room>();
@@ -107,24 +114,30 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms.add(new Room(11.0f, 5.0f, 3));
 		mLight3.setPosition(11.0f, 5.0f, -5f);
 		
+		rooms.add(new Room(2.0f, 0.0f, 4));
+		mLight4.setPosition(2.0f, 0.0f, -5.0f);
+		
 		//Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
-		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));
 
 		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));
-		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));
 		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));
 		
-		rooms.get(2).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
-		rooms.get(2).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
+		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));
 		
 		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
+		
+		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
+		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
 		
 		//Füge die Lichtsteuerung hinzu
 		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light_color"));
 		rooms.get(1).gestures.add(new LightGesture(100,100,700,380, "kitchen_light_color"));
 		rooms.get(2).gestures.add(new LightGesture(100,100,700,380, "lounge_light_color"));
 		rooms.get(3).gestures.add(new LightGesture(100,100,700,380, "sleeping_light_color"));
+		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light_color"));
 		
 		this.room = rooms.get(0);
 	}

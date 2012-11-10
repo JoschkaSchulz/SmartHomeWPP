@@ -31,6 +31,9 @@ public class LightGesture extends Gesture {
 			case 3:
 				activity.mRenderer.setLight3(on);
 				break;
+			case 4:
+				activity.mRenderer.setLight4(on);
+				break;
 		}
 		
 		try {
