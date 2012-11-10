@@ -9,6 +9,7 @@ import android.content.Context;
 
 import rajawali.BaseObject3D;
 import rajawali.Camera;
+import rajawali.lights.ALight;
 import rajawali.lights.DirectionalLight;
 import rajawali.lights.PointLight;
 import rajawali.materials.CubeMapMaterial;
@@ -42,7 +43,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	private void setUpLights() {
 		mLight = new DirectionalLight(1f, 0.2f, 1.0f);
-		mLight.setPower(1); 
+		mLight.setPower(0.5f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
@@ -62,7 +63,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		
-//		mLivingPlace.addLight(mLight);	//Add this light for a brighter model
+		mLivingPlace.addLight(mLight);	//Add this light for a brighter model
 		mLivingPlace.addLight(mLight0);	//Light(Wohnzimmer)
 		mLivingPlace.addLight(mLight1);	//Light(Küche)
 		mLivingPlace.addLight(mLight2);	//Light(Esszimmer)
@@ -80,21 +81,30 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	public void setLight0(boolean on) {
 		mLight0.setPower(on ? 2 : 0);
 	}
+	public void setLight1(boolean on) {
+		mLight1.setPower(on ? 2 : 0);
+	}
+	public void setLight2(boolean on) {
+		mLight2.setPower(on ? 2 : 0);
+	}
+	public void setLight3(boolean on) {
+		mLight3.setPower(on ? 2 : 0);
+	}
 	
 	private void setUpRooms() {
 		rooms = new LinkedList<Room>();
 		
 		//Füge Räume hinzu
-		rooms.add(new Room(-2.5f, 4.5f));
+		rooms.add(new Room(-2.5f, 4.5f, 0));
 		mLight0.setPosition(-2.5f, 4.5f, -5f);
 		
-		rooms.add(new Room(5.0f, 5.0f));
+		rooms.add(new Room(5.0f, 5.0f, 1));
 		mLight1.setPosition(5.0f, 5.0f, -5f);
 		
-		rooms.add(new Room(-1.5f, -4.0f));
+		rooms.add(new Room(-1.5f, -4.0f, 2));
 		mLight2.setPosition(-1.5f, -4.0f, -5f);
 		
-		rooms.add(new Room(11.0f, 5.0f));
+		rooms.add(new Room(11.0f, 5.0f, 3));
 		mLight3.setPosition(11.0f, 5.0f, -5f);
 		
 		//Füge die Raumwechsel hinzu
