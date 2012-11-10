@@ -103,19 +103,19 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		//Füge Räume hinzu
 		rooms.add(new Room(-2.5f, 4.5f, 0));
-		mLight0.setPosition(-2.5f, 4.5f, -5f);
+		mLight0.setPosition(-2.5f, 5.5f, -2.0f);
 		
 		rooms.add(new Room(5.0f, 5.0f, 1));
-		mLight1.setPosition(5.0f, 5.0f, -5f);
+		mLight1.setPosition(5.0f, 5.0f, -2.0f);
 		
 		rooms.add(new Room(-1.5f, -4.0f, 2));
-		mLight2.setPosition(-1.5f, -4.0f, -5f);
+		mLight2.setPosition(-1.5f, -4.0f, -2.0f);
 		
 		rooms.add(new Room(11.0f, 5.0f, 3));
-		mLight3.setPosition(11.0f, 5.0f, -5f);
+		mLight3.setPosition(11.0f, 5.0f, -2.0f);
 		
 		rooms.add(new Room(2.0f, 0.0f, 4));
-		mLight4.setPosition(2.0f, 0.0f, -5.0f);
+		mLight4.setPosition(0.0f, 0.0f, -2.0f);
 		
 		//Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
@@ -131,6 +131,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
 		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
+		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
 		
 		//Füge die Lichtsteuerung hinzu
 		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light_color"));
