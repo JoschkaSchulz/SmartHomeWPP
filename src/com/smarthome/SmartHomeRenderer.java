@@ -44,7 +44,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private void setUpLights() {
 		mLight = new PointLight();
 		mLight.setPosition(1f, 0.2f, -40.0f);
-		mLight.setPower(4f); 
+		mLight.setPower(20f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
@@ -75,7 +75,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.addLight(mLight4);	//Light(Korridor)
 		
 		addChild(mLivingPlace);
-		mLivingPlace.setScale(10.0f);
+		mLivingPlace.setScale(1.0f);
 
 		
 		
@@ -157,7 +157,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.setRotY(180);
 		mLivingPlace.setRotX(90);
 
-		mCamera.setZ(-25.0f);
+		mCamera.setZ(-35.0f);
 		
 	}
 	
