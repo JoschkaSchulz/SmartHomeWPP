@@ -44,7 +44,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private void setUpLights() {
 		mLight = new PointLight();
 		mLight.setPosition(1f, 0.2f, -40.0f);
-		mLight.setPower(20f); 
+		mLight.setPower(40f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
