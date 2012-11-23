@@ -22,11 +22,11 @@ import rajawali.primitives.Cube;
 import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {
-	private DirectionalLight mLight;
+	private PointLight mLight;
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
-	private DiffuseMaterial mMaterial;
+	private PhongMaterial mMaterial;
 	private ToonMaterial mToonMaterial;
 	private PhongMaterial mPhongMaterial;
 	
@@ -42,8 +42,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	private void setUpLights() {
-		mLight = new DirectionalLight(1f, 0.2f, 1.0f);
-		mLight.setPower(0.5f); 
+		mLight = new PointLight();
+		mLight.setPosition(1f, 0.2f, -40.0f);
+		mLight.setPower(4f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
@@ -62,7 +63,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	private void setUpLivingPlaceModel() {
-		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_obj);
+		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_new_obj);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		
@@ -76,26 +77,29 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(10.0f);
 
-		mMaterial = new DiffuseMaterial();
+		
+		
+		mMaterial = new PhongMaterial();
+		mMaterial.setShininess(0.8f);
 		mMaterial.setUseColor(true);
 		mLivingPlace.setMaterial(mMaterial);
 		mLivingPlace.setColor(0xff666666);
 	}
 	
 	public void setLight0(boolean on) {
-		mLight0.setPower(on ? 2 : 0);
+		mLight0.setPower(on ? 0.2f : 0);
 	}
 	public void setLight1(boolean on) {
-		mLight1.setPower(on ? 2 : 0);
+		mLight1.setPower(on ? 0.2f : 0);
 	}
 	public void setLight2(boolean on) {
-		mLight2.setPower(on ? 2 : 0);
+		mLight2.setPower(on ? 0.2f : 0);
 	}
 	public void setLight3(boolean on) {
-		mLight3.setPower(on ? 2 : 0);
+		mLight3.setPower(on ? 0.2f : 0);
 	}
 	public void setLight4(boolean on) {
-		mLight4.setPower(on ? 2 : 0);
+		mLight4.setPower(on ? 0.2f : 0);
 	}
 	
 	private void setUpRooms() {
@@ -153,7 +157,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.setRotY(180);
 		mLivingPlace.setRotX(90);
 
-		mCamera.setZ(-15.0f);
+		mCamera.setZ(-25.0f);
 		
 	}
 	
