@@ -49,7 +49,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
 		
-		mLight1 = new PointLight();
+		mLight1 = new PointLight(); 
 		mLight1.setPower(0);
 		
 		mLight2 = new PointLight();
@@ -63,7 +63,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	private void setUpLivingPlaceModel() {
-		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_new_obj);
+		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_obj);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		
@@ -76,7 +76,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(1.0f);
-
+		
 		mLivingPlace.setDoubleSided(true);
 		
 		mMaterial = new PhongMaterial();
