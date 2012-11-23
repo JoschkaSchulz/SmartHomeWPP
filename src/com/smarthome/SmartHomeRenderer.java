@@ -26,7 +26,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
-	private PhongMaterial mMaterial;
+	private DiffuseMaterial mMaterial;
 	private ToonMaterial mToonMaterial;
 	private PhongMaterial mPhongMaterial;
 	
@@ -43,8 +43,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	private void setUpLights() {
 		mLight = new PointLight();
-		mLight.setPosition(1f, 0.2f, -40.0f);
-		mLight.setPower(40f); 
+		mLight.setPosition(1f, 0.2f, -400.0f);
+		mLight.setPower(25f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
@@ -75,15 +75,15 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.addLight(mLight4);	//Light(Korridor)
 		
 		addChild(mLivingPlace);
-		mLivingPlace.setScale(1.0f);
+		mLivingPlace.setScale(0.258f);
 		
 		mLivingPlace.setDoubleSided(true);
 		
-		mMaterial = new PhongMaterial();
-		mMaterial.setShininess(0.8f);
-		mMaterial.setUseColor(true);
-		mLivingPlace.setMaterial(mMaterial);
-		mLivingPlace.setColor(0xff666666);
+//		mMaterial = new DiffuseMaterial();
+//		mMaterial.setShininess(0.8f);
+//		mMaterial.setUseColor(true);
+//		mLivingPlace.setMaterial(mMaterial);
+//		mLivingPlace.setColor(0xff666666);
 	}
 	
 	public void setLight0(boolean on) {
