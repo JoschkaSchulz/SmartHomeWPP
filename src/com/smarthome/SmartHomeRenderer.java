@@ -57,7 +57,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		mLight3 = new PointLight();
 		mLight3.setPower(0);
-		
+		 
 		mLight4 = new PointLight();
 		mLight4.setPower(0);
 	}
@@ -77,7 +77,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(1.0f);
 
-		
+		mLivingPlace.setDoubleSided(true);
 		
 		mMaterial = new PhongMaterial();
 		mMaterial.setShininess(0.8f);
