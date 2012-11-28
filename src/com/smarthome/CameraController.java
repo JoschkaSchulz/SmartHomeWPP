@@ -11,6 +11,9 @@ public class CameraController {
 			p2 = new float[6], p3 = new float[6];
 	private Camera src = new Camera();
 	private Camera tar = new Camera();
+	public boolean ready() {
+		return src != null && tar != null;
+	}
 	public float b(float t, float p0, float p1, float p2, float p3) {
 		float tn = 1 - t;
 		float tn2 = tn * tn;
@@ -53,5 +56,15 @@ public class CameraController {
 		cam.setRotY(b(t, src.getRotY(), src.getRotY(), tar.getRotY(), tar.getRotY()));
 		cam.setRotZ(b(t, src.getRotZ(), src.getRotZ(), tar.getRotZ(), tar.getRotZ()));
 		return cam;
+	}
+	public void createRelativeDisplacement(float x, float y, float z, float rotX, float rotY, float rotZ) {
+		Camera cam = giveSource();
+		cam.setX(cam.getX() + x);
+		cam.setY(cam.getY() + y);
+		cam.setZ(cam.getZ() + z);
+		cam.setRotX(cam.getRotX() + x);
+		cam.setRotY(cam.getRotY() + y);
+		cam.setRotZ(cam.getRotZ() + z);
+		setTarget(cam);
 	}
 }

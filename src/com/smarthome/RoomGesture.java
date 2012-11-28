@@ -15,6 +15,7 @@ public class RoomGesture extends Gesture {
 		camera = activity.camera.giveSource();
 		camera.setX(room.getX());
 		camera.setY(room.getY());
+		activity.camera.logSource();
         activity.camera.setTarget(camera);
 	}
 	public String toString() {

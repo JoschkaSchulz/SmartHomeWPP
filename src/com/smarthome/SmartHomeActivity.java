@@ -99,8 +99,6 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     @Override
 	protected void onStart() {
 		super.onStart();
-        camera.logSource();
-        camera.setTarget(camera.giveSource());
 	}
 
 	@Override

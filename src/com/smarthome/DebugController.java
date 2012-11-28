@@ -101,12 +101,13 @@ public class DebugController extends Room implements ActionListener {
 		if (action.equals(">>")) change = 5;
 		if (mode == 0 && change != 0) {
 			activity.room = null;
-			if (element == 0) activity.mRenderer.getCamera().setX(activity.mRenderer.getCamera().getX() + change);
-			if (element == 1) activity.mRenderer.getCamera().setY(activity.mRenderer.getCamera().getY() + change);
-			if (element == 2) activity.mRenderer.getCamera().setZ(activity.mRenderer.getCamera().getZ() + change);
-			if (element == 3) activity.mRenderer.getCamera().setRotX(activity.mRenderer.getCamera().getRotX() + change);
-			if (element == 4) activity.mRenderer.getCamera().setRotY(activity.mRenderer.getCamera().getRotY() + change);
-			if (element == 5) activity.mRenderer.getCamera().setRotZ(activity.mRenderer.getCamera().getRotZ() + change);
+			activity.camera.logSource();
+			if (element == 0) activity.camera.createRelativeDisplacement(change, 0, 0, 0, 0, 0);
+			if (element == 1) activity.camera.createRelativeDisplacement(0, change, 0, 0, 0, 0);
+			if (element == 2) activity.camera.createRelativeDisplacement(0, 0, change, 0, 0, 0);
+			if (element == 3) activity.camera.createRelativeDisplacement(0, 0, 0, change, 0, 0);
+			if (element == 4) activity.camera.createRelativeDisplacement(0, 0, 0, 0, change, 0);
+			if (element == 5) activity.camera.createRelativeDisplacement(0, 0, 0, 0, 0, change);
 		}
 		if (mode == 1 && element == 0) activity.mRenderer.mLight.setX(activity.mRenderer.mLight.getX() + change);
 		if (mode == 1 && element == 1) activity.mRenderer.mLight.setY(activity.mRenderer.mLight.getY() + change);
