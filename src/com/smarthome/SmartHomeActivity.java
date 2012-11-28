@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener {
 
 	public Room room;
-	private LinkedList<Room> rooms;
+	public LinkedList<Room> rooms;
 	
 	public boolean isDebug = true;
 	public DebugController debug;

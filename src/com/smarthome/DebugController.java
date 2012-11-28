@@ -59,6 +59,12 @@ public class DebugController extends Room implements ActionListener {
 	public String message = "Info:";
 	public boolean messageUpdated = true;
 	public void actionPerformed(String action, SmartHomeActivity activity) {
+		if (action.equals("leave")) {
+			activity.label.setText("Info:");
+			activity.isDebug = false;
+			if (activity.room == null) activity.room = activity.rooms.get(0);
+			return;
+		}
 		if (action.equals("mode")) addMode();
 		if (action.equals("element")) addElement();
 		int change = 0;
@@ -81,6 +87,5 @@ public class DebugController extends Room implements ActionListener {
 			activity.label.setText(message);
 			messageUpdated = false;
 		}
-		if (action.equals("leave")) activity.isDebug = false;
 	}
 }
