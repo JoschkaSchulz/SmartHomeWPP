@@ -26,6 +26,15 @@ public class DebugController extends Room implements ActionListener {
 	public String getElement() {
 		switch (mode) {
 		case 0:
+			switch (element) {
+			case 0: return "X";
+			case 1: return "Y";
+			case 2: return "Z";
+			case 3: return "rotX";
+			case 4: return "rotY";
+			case 5: return "rotZ";
+			}
+			break;
 		case 1:
 			switch (element) {
 			case 0: return "X";
@@ -33,13 +42,19 @@ public class DebugController extends Room implements ActionListener {
 			case 2: return "Z";
 			case 3: return "Intensity";
 			}
+			break;
 		}
 		return "unknown";
 	}
 	public String getInfo() {
 		switch (mode) {
 		case 0:
-			return "[" + activity.mRenderer.getCamera().getX() + ", " + activity.mRenderer.getCamera().getY() + ", " + activity.mRenderer.getCamera().getZ() + "]";
+			return "[" + activity.mRenderer.getCamera().getX() + ", " +
+				activity.mRenderer.getCamera().getY() + ", " +
+				activity.mRenderer.getCamera().getZ() + ", " +
+				activity.mRenderer.getCamera().getRotX() + ", " +
+				activity.mRenderer.getCamera().getRotY() + ", " +
+				activity.mRenderer.getCamera().getRotZ() + "]";
 		case 1:
 			return "[" + activity.mRenderer.mLight.getX() + ", " + activity.mRenderer.mLight.getY() + ", " + activity.mRenderer.mLight.getZ() + "]:" + activity.mRenderer.mLight.getPower();
 		}
@@ -47,10 +62,12 @@ public class DebugController extends Room implements ActionListener {
 	}
 	public void addMode() {
 		if (++mode > 1) mode = 0;
+		element = 0;
 	}
 	public void addElement() {
 		++element;
-		if (mode == 0 || mode == 1) if (element > 3) element = 0;
+		if (mode == 0) if (element > 5) element = 0;
+		if (mode == 1) if (element > 3) element = 0;
 	}
 	public void updateMessage() {
 		message = getMode() + " (" + getElement() + ") " + getInfo();
@@ -77,6 +94,9 @@ public class DebugController extends Room implements ActionListener {
 			if (element == 0) activity.mRenderer.getCamera().setX(activity.mRenderer.getCamera().getX() + change);
 			if (element == 1) activity.mRenderer.getCamera().setY(activity.mRenderer.getCamera().getY() + change);
 			if (element == 2) activity.mRenderer.getCamera().setZ(activity.mRenderer.getCamera().getZ() + change);
+			if (element == 3) activity.mRenderer.getCamera().setRotX(activity.mRenderer.getCamera().getRotX() + change);
+			if (element == 4) activity.mRenderer.getCamera().setRotY(activity.mRenderer.getCamera().getRotY() + change);
+			if (element == 5) activity.mRenderer.getCamera().setRotZ(activity.mRenderer.getCamera().getRotZ() + change);
 		}
 		if (mode == 1 && element == 0) activity.mRenderer.mLight.setX(activity.mRenderer.mLight.getX() + change);
 		if (mode == 1 && element == 1) activity.mRenderer.mLight.setY(activity.mRenderer.mLight.getY() + change);

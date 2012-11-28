@@ -3,21 +3,29 @@ package com.smarthome;
 import java.util.LinkedList;
 
 import rajawali.RajawaliActivity;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.method.Touch;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener {
+public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener, OnCreateContextMenuListener {
 
 	public Room room;
 	public LinkedList<Room> rooms;
@@ -34,10 +42,10 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		x1 = g.x1; y1 = g.y1; x2 = g.x2; y2 = g.y2;
 		float sx = (x2 - x1) / ix;
 		float sy = (y2 - y1) / iy;
-		image.setScaleX(sx);
-		image.setScaleY(sy);
-		image.setTranslationX(x1);
-		image.setTranslationY(y1);
+		Matrix matrix = new Matrix();
+		matrix.setScale(sx, sy);
+		matrix.setTranslate(x1, y1);
+		image.setImageMatrix(matrix);
 	}
 	
     @Override
@@ -60,28 +68,41 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	mRenderer.setSurfaceView(mSurfaceView);
     	super.setRenderer(mRenderer);
     	mSurfaceView.setOnTouchListener(this);
+    	mSurfaceView.setOnCreateContextMenuListener(this);
     	
     	LinearLayout ll = new LinearLayout(this);
     	ll.setOrientation(LinearLayout.VERTICAL);
         ll.setGravity(Gravity.TOP);
+        
+        FrameLayout frame = new FrameLayout(this);
+        
         
         label = new TextView(this);
         label.setText("Info:");
         label.setTextSize(20);
         label.setGravity(Gravity.LEFT);
         label.setHeight(100);
-        ll.addView(label);
-         
+        label.setBackgroundColor(Color.TRANSPARENT);
+        //ll.addView(label);
+        frame.addView(label);
+        
         ImageView image = new ImageView(this);
         image.setImageResource(R.drawable.debug);
-        image.setScaleType(ScaleType.CENTER_CROP);
-        //image.setScaleX(2f);
+        image.setScaleType(ScaleType.MATRIX);
         prepareImage(0, 0, 800, 480, image, 800, 480);
         ll.addView(image);
         
+        mLayout.addView(frame);
         mLayout.addView(ll);
     } 
 
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    	super.onCreateContextMenu(menu, v, menuInfo);
+    	MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_smart_home, menu);
+    	System.out.println("TEST!");
+    }
+    
 	public boolean onTouch(View v, MotionEvent event) {
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
 			/*System.out.println("TOUCH! x:"+event.getX()+" y:"+event.getY());
