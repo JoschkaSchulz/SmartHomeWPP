@@ -3,7 +3,7 @@ package com.smarthome;
 import rajawali.Camera;
 
 public class CameraController {
-	SmartHomeActivity activity;
+	public SmartHomeActivity activity;
 	private float t;
 	private long timestamp;
 	private float duration = 1500;

@@ -50,6 +50,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	
+    	camera.activity = this;
+    	
     	Display display = getWindowManager().getDefaultDisplay();
     	Point size = new Point();
     	display.getSize(size);
