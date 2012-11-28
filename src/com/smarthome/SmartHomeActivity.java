@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,6 +28,17 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	public static int screenHeight;
 	public SmartHomeRenderer mRenderer;
 	public TextView label;
+	
+	public void prepareImage(float x1, float y1, float x2, float y2, ImageView image, int ix, int iy) {
+		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
+		x1 = g.x1; y1 = g.y1; x2 = g.x2; y2 = g.y2;
+		float sx = (x2 - x1) / ix;
+		float sy = (y2 - y1) / iy;
+		image.setScaleX(sx);
+		image.setScaleY(sy);
+		image.setTranslationX(x1);
+		image.setTranslationY(y1);
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,9 +73,10 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         ll.addView(label);
          
         ImageView image = new ImageView(this);
-        image.setImageResource(R.drawable.bright);
+        image.setImageResource(R.drawable.debug);
         image.setScaleType(ScaleType.CENTER_CROP);
-        image.setScaleX(2f);
+        //image.setScaleX(2f);
+        prepareImage(0, 0, 800, 480, image, 800, 480);
         ll.addView(image);
         
         mLayout.addView(ll);
