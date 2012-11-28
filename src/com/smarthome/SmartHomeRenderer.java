@@ -112,10 +112,10 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		//Raum: Küche
 		mLight1.setPosition(25.5f, -8f, -2.0f);
 		
-		//Raum: Wohnzimmer
+		//Raum: Schlafzimmer
 		mLight2.setPosition(12.0f, -30.5f, -2.0f);
 		
-		//Raum: Flur
+		//Raum: Wohnzimmer
 		mLight3.setPosition(41.5f, -8f, -2.0f);
 		
 		//Raum: Flur
