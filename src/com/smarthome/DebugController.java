@@ -1,5 +1,7 @@
 package com.smarthome;
 
+import android.view.View;
+
 public class DebugController extends Room implements ActionListener {
 	SmartHomeActivity activity;
 	int mode = 0;
@@ -76,7 +78,15 @@ public class DebugController extends Room implements ActionListener {
 	public String message = "Info:";
 	public boolean messageUpdated = true;
 	public void actionPerformed(String action, SmartHomeActivity activity) {
+		if (action.equals("enter")) {
+			activity.image.setVisibility(View.VISIBLE);
+			activity.label.setText(message);
+			messageUpdated = false;
+			activity.isDebug = true;
+			return;
+		}
 		if (action.equals("leave")) {
+			activity.image.setVisibility(View.INVISIBLE);
 			activity.label.setText("Info:");
 			activity.isDebug = false;
 			if (activity.room == null) activity.room = activity.rooms.get(0);
