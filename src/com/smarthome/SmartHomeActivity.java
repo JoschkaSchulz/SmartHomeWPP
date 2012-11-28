@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -58,6 +60,12 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         label.setHeight(100);
         ll.addView(label);
          
+        ImageView image = new ImageView(this);
+        image.setImageResource(R.drawable.bright);
+        image.setScaleType(ScaleType.CENTER_CROP);
+        image.setScaleX(2f);
+        ll.addView(image);
+        
         mLayout.addView(ll);
     } 
 

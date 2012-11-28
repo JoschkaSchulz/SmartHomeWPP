@@ -6,6 +6,8 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import rajawali.BaseObject3D;
 import rajawali.Camera;
@@ -15,6 +17,7 @@ import rajawali.lights.PointLight;
 import rajawali.materials.CubeMapMaterial;
 import rajawali.materials.DiffuseMaterial;
 import rajawali.materials.PhongMaterial;
+import rajawali.materials.SimpleMaterial;
 import rajawali.materials.ToonMaterial;
 import rajawali.parser.Max3DSParser;
 import rajawali.parser.ObjParser;
@@ -26,9 +29,6 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
-	private DiffuseMaterial mMaterial;
-	private ToonMaterial mToonMaterial;
-	private PhongMaterial mPhongMaterial;
 	
 	private BaseObject3D windowButton1, windowButton2,windowButton3;
 	private BaseObject3D lightButton1, lightButton2,lightButton3;
@@ -79,7 +79,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace.setRotX(90f);
 		mLivingPlace.setRotY(-90f);
 		
-//		mLivingPlace.setDoubleSided(true);
+		mLivingPlace.setDoubleSided(true);
 		
 //		mMaterial = new DiffuseMaterial();
 //		mMaterial.setShininess(0.8f);
