@@ -26,7 +26,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
-	private PhongMaterial mMaterial;
+	private DiffuseMaterial mMaterial;
 	private ToonMaterial mToonMaterial;
 	private PhongMaterial mPhongMaterial;
 	
@@ -43,13 +43,13 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	private void setUpLights() {
 		mLight = new PointLight();
-		mLight.setPosition(1f, 0.2f, -40.0f);
-		mLight.setPower(40f); 
+		mLight.setPosition(1f, 0.2f, -400.0f);
+		mLight.setPower(25f); 
 		
 		mLight0 = new PointLight();
 		mLight0.setPower(0);
 		
-		mLight1 = new PointLight();
+		mLight1 = new PointLight(); 
 		mLight1.setPower(0);
 		
 		mLight2 = new PointLight();
@@ -63,7 +63,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	private void setUpLivingPlaceModel() {
-		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_new_obj);
+		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_obj);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		
@@ -76,14 +76,16 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(1.0f);
-
-		mLivingPlace.setDoubleSided(true);
+		mLivingPlace.setRotX(90f);
+		mLivingPlace.setRotY(-90f);
 		
-		mMaterial = new PhongMaterial();
-		mMaterial.setShininess(0.8f);
-		mMaterial.setUseColor(true);
-		mLivingPlace.setMaterial(mMaterial);
-		mLivingPlace.setColor(0xff666666);
+//		mLivingPlace.setDoubleSided(true);
+		
+//		mMaterial = new DiffuseMaterial();
+//		mMaterial.setShininess(0.8f);
+//		mMaterial.setUseColor(true);
+//		mLivingPlace.setMaterial(mMaterial);
+//		mLivingPlace.setColor(0xff666666);
 	}
 	
 	public void setLight0(boolean on) {
@@ -106,28 +108,34 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms = new LinkedList<Room>();
 		
 		//Füge Räume hinzu
-		rooms.add(new Room(-2.5f, 4.5f, 0));
-		mLight0.setPosition(-2.5f, 5.5f, -2.0f);
 		
-		rooms.add(new Room(5.0f, 5.0f, 1));
-		mLight1.setPosition(5.0f, 5.0f, -2.0f);
+		//Raum: Esszimmer
+		rooms.add(new Room(7f, -8f, 0));
+		mLight0.setPosition(7f, -8f, -2.0f);
 		
-		rooms.add(new Room(-1.5f, -4.0f, 2));
-		mLight2.setPosition(-1.5f, -4.0f, -2.0f);
+		//Raum: Küche
+		rooms.add(new Room(25.5f, -8f, 1));
+		mLight1.setPosition(25.5f, -8f, -2.0f);
 		
-		rooms.add(new Room(11.0f, 5.0f, 3));
-		mLight3.setPosition(11.0f, 5.0f, -2.0f);
+		//Raum: Wohnzimmer
+		rooms.add(new Room(12.0f, -30.5f, 2));
+		mLight2.setPosition(12.0f, -30.5f, -2.0f);
 		
-		rooms.add(new Room(2.0f, 0.0f, 4));
-		mLight4.setPosition(0.0f, 0.0f, -2.0f);
+		//Raum: Flur
+		rooms.add(new Room(41.5f, -8f, 3));
+		mLight3.setPosition(41.5f, -8f, -2.0f);
+		
+		//Raum: Flur
+		rooms.add(new Room(17.5f, -19f, 4));
+		mLight4.setPosition(17.5f, -19f, -2.0f);
 		
 		//Füge die Raumwechsel hinzu
-		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));
-		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));
+		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));	//Esszimmer -> Küche
+		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));	//Esszimmer -> Flur
 
-		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));
-		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));
-		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));
+		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));	//Küche	-> Esszimmer
+		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));	//Küche	-> Flur
+		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));	//Küche	-> Wohnzimmer
 		
 		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));
 		
@@ -153,11 +161,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		this.setUpLivingPlaceModel();
 		
 		this.setUpRooms();
-		
-		mLivingPlace.setRotY(180);
-		mLivingPlace.setRotX(90);
 
-		mCamera.setZ(-35.0f);
+		mCamera.setZ(-50.0f);
 		
 	}
 	
@@ -168,7 +173,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
 		
-		this.getCamera().setPosition(this.room.getX(), this.room.getY(), -15.0f);
+		this.getCamera().setPosition(this.room.getX(), this.room.getY(), -50.0f);
 	}
 	
 	public Camera getCamera() {
