@@ -33,6 +33,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	public TextView label;
 	public ImageView image;
 	
+	public CameraController camera = new CameraController();
+	
 	public void prepareImage(float x1, float y1, float x2, float y2, ImageView image, int ix, int iy) {
 		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
 		x1 = g.x1; y1 = g.y1; x2 = g.x2; y2 = g.y2;
@@ -90,6 +92,9 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         
         mLayout.addView(frame);
         mLayout.addView(ll);
+        
+        camera.logSource();
+        camera.setTarget(camera.giveSource());
 
         debug.actionPerformed("enter", this);
     } 

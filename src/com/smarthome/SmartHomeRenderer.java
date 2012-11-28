@@ -140,8 +140,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-		if (activity.room != null)
-			this.getCamera().setPosition(activity.room.getX(), activity.room.getY(), -50.0f);
+		activity.camera.setCamera();
+		/*if (activity.room != null)
+			this.getCamera().setPosition(activity.room.getX(), activity.room.getY(), -50.0f);*/
 	}
 	
 	public Camera getCamera() {

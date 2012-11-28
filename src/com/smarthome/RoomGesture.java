@@ -1,5 +1,7 @@
 package com.smarthome;
 
+import rajawali.Camera;
+
 public class RoomGesture extends Gesture {
 	public Room room;
 	public RoomGesture() {}
@@ -9,6 +11,11 @@ public class RoomGesture extends Gesture {
 	}
 	public void click(SmartHomeActivity activity) {
 		activity.room = room;
+		Camera camera = new Camera();
+		camera = activity.camera.giveSource();
+		camera.setX(room.getX());
+		camera.setY(room.getY());
+        activity.camera.setTarget(camera);
 	}
 	public String toString() {
 		return super.toString() + " to room " + room.getID();
