@@ -66,6 +66,12 @@ public class DebugController extends Room implements ActionListener {
 		if (action.equals("<")) change = -1;
 		if (action.equals(">")) change = 1;
 		if (action.equals(">>")) change = 5;
+		if (mode == 0 && change != 0) {
+			activity.room = null;
+			if (element == 0) activity.mRenderer.getCamera().setX(activity.mRenderer.getCamera().getX() + change);
+			if (element == 1) activity.mRenderer.getCamera().setY(activity.mRenderer.getCamera().getY() + change);
+			if (element == 2) activity.mRenderer.getCamera().setZ(activity.mRenderer.getCamera().getZ() + change);
+		}
 		if (mode == 1 && element == 0) activity.mRenderer.mLight.setX(activity.mRenderer.mLight.getX() + change);
 		if (mode == 1 && element == 1) activity.mRenderer.mLight.setY(activity.mRenderer.mLight.getY() + change);
 		if (mode == 1 && element == 2) activity.mRenderer.mLight.setZ(activity.mRenderer.mLight.getZ() + change);
@@ -75,5 +81,6 @@ public class DebugController extends Room implements ActionListener {
 			activity.label.setText(message);
 			messageUpdated = false;
 		}
+		if (action.equals("leave")) activity.isDebug = false;
 	}
 }
