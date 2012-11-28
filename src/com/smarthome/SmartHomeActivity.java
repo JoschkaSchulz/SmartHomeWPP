@@ -127,7 +127,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 			else if (room != null)
 				room.fire(event.getX(), event.getY(), this);
 		}
-		if(event.getAction() == MotionEvent.ACTION_MOVE) {
+		if(event.getActionMasked() == MotionEvent.ACTION_MOVE) {
 			System.out.println("Moved!");
 		}
 		return super.onTouchEvent(event);
