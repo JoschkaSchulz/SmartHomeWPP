@@ -8,7 +8,7 @@ public class RoomGesture extends Gesture {
 		this.room = room;
 	}
 	public void click(SmartHomeActivity activity) {
-		activity.mRenderer.room = room;
+		activity.room = room;
 	}
 	public String toString() {
 		return super.toString() + " to room " + room.getID();

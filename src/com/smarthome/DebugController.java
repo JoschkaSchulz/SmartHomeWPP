@@ -1,12 +1,12 @@
 package com.smarthome;
 
 public class DebugController extends Room implements ActionListener {
-	SmartHomeRenderer renderer;
+	SmartHomeActivity activity;
 	int mode = 0;
 	int element = 0;
-	public DebugController(float x, float y, int id, SmartHomeRenderer renderer) {
+	public DebugController(float x, float y, int id, SmartHomeActivity activity) {
 		super(x, y, id);
-		this.renderer = renderer;
+		this.activity = activity;
 		//this.gestures.add(new DebugGesture(0, 0, 800, 480, "debug", this));
 		this.gestures.add(new DebugGesture(0, 0, 200, 80, "mode", this));
 		this.gestures.add(new DebugGesture(200, 0, 500, 80, "element", this));
@@ -39,9 +39,9 @@ public class DebugController extends Room implements ActionListener {
 	public String getInfo() {
 		switch (mode) {
 		case 0:
-			return "[" + renderer.getCamera().getX() + ", " + renderer.getCamera().getY() + ", " + renderer.getCamera().getZ() + "]";
+			return "[" + activity.mRenderer.getCamera().getX() + ", " + activity.mRenderer.getCamera().getY() + ", " + activity.mRenderer.getCamera().getZ() + "]";
 		case 1:
-			return "[" + renderer.mLight.getX() + ", " + renderer.mLight.getY() + ", " + renderer.mLight.getZ() + "]:" + renderer.mLight.getPower();
+			return "[" + activity.mRenderer.mLight.getX() + ", " + activity.mRenderer.mLight.getY() + ", " + activity.mRenderer.mLight.getZ() + "]:" + activity.mRenderer.mLight.getPower();
 		}
 		return "unknown";
 	}
@@ -58,7 +58,7 @@ public class DebugController extends Room implements ActionListener {
 	}
 	public String message = "Info:";
 	public boolean messageUpdated = true;
-	public void actionPerformed(String action) {
+	public void actionPerformed(String action, SmartHomeActivity activity) {
 		if (action.equals("mode")) addMode();
 		if (action.equals("element")) addElement();
 		int change = 0;
@@ -66,10 +66,14 @@ public class DebugController extends Room implements ActionListener {
 		if (action.equals("<")) change = -1;
 		if (action.equals(">")) change = 1;
 		if (action.equals(">>")) change = 5;
-		if (mode == 1 && element == 0) renderer.mLight.setX(renderer.mLight.getX() + change);
-		if (mode == 1 && element == 1) renderer.mLight.setY(renderer.mLight.getY() + change);
-		if (mode == 1 && element == 2) renderer.mLight.setZ(renderer.mLight.getZ() + change);
-		if (mode == 1 && element == 3) renderer.mLight.setPower(renderer.mLight.getPower() + change);
+		if (mode == 1 && element == 0) activity.mRenderer.mLight.setX(activity.mRenderer.mLight.getX() + change);
+		if (mode == 1 && element == 1) activity.mRenderer.mLight.setY(activity.mRenderer.mLight.getY() + change);
+		if (mode == 1 && element == 2) activity.mRenderer.mLight.setZ(activity.mRenderer.mLight.getZ() + change);
+		if (mode == 1 && element == 3) activity.mRenderer.mLight.setPower(activity.mRenderer.mLight.getPower() + change);
 		updateMessage();
+		if (messageUpdated) {
+			activity.label.setText(message);
+			messageUpdated = false;
+		}
 	}
 }

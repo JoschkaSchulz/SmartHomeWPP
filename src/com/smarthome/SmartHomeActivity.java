@@ -1,5 +1,7 @@
 package com.smarthome;
 
+import java.util.LinkedList;
+
 import rajawali.RajawaliActivity;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -14,10 +16,15 @@ import android.widget.TextView;
 
 public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener {
 
+	public Room room;
+	private LinkedList<Room> rooms;
 	
+	public boolean isDebug = true;
+	public DebugController debug;
 	public static int screenWidth;
 	public static int screenHeight;
 	public SmartHomeRenderer mRenderer;
+	public TextView label;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	System.out.println("Width: "+screenWidth);
     	System.out.println("Height: "+screenHeight);
     	
+    	setUpRooms();
+    	
     	mRenderer = new SmartHomeRenderer(this);
     	mRenderer.setSurfaceView(mSurfaceView);
     	super.setRenderer(mRenderer);
@@ -42,7 +51,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	ll.setOrientation(LinearLayout.VERTICAL);
         ll.setGravity(Gravity.TOP);
         
-        TextView label = new TextView(this);
+        label = new TextView(this);
         label.setText("Info:");
         label.setTextSize(20);
         label.setGravity(Gravity.LEFT);
@@ -72,11 +81,62 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 				System.out.println("Y: "+mRenderer.getCamera().getY());
 				System.out.println("Z: "+mRenderer.getCamera().getZ());
 			}*/
-			mRenderer.room.fire(event.getX(), event.getY(), this);
+			if (isDebug && mRenderer != null)
+				debug.fire(event.getX(), event.getY(), this);
+			else if (room != null)
+				room.fire(event.getX(), event.getY(), this);
 		}
 		if(event.getAction() == MotionEvent.ACTION_MOVE) {
 			System.out.println("Moved!");
 		}
 		return super.onTouchEvent(event);
+	}
+
+	private void setUpRooms() {
+		debug = new DebugController(10f, 10f, 99, this);
+		
+		rooms = new LinkedList<Room>();
+		
+		//Füge Räume hinzu
+		
+		//Raum: Esszimmer
+		rooms.add(new Room(7f, -8f, 0));
+		
+		//Raum: Küche
+		rooms.add(new Room(25.5f, -8f, 1));
+		
+		//Raum: Wohnzimmer
+		rooms.add(new Room(12.0f, -30.5f, 2));
+		
+		//Raum: Flur
+		rooms.add(new Room(41.5f, -8f, 3));
+		
+		//Raum: Flur
+		rooms.add(new Room(17.5f, -19f, 4));
+		
+		//Füge die Raumwechsel hinzu
+		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));	//Esszimmer -> Küche
+		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));	//Esszimmer -> Flur
+
+		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0)));	//Küche	-> Esszimmer
+		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));	//Küche	-> Flur
+		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));	//Küche	-> Wohnzimmer
+		
+		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));
+		
+		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
+		
+		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
+		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
+		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		
+		//Füge die Lichtsteuerung hinzu
+		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light_color"));
+		rooms.get(1).gestures.add(new LightGesture(100,100,700,380, "kitchen_light_color"));
+		rooms.get(2).gestures.add(new LightGesture(100,100,700,380, "lounge_light_color"));
+		rooms.get(3).gestures.add(new LightGesture(100,100,700,380, "sleeping_light_color"));
+		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light_color"));
+		
+		this.room = rooms.get(0);
 	}
 }

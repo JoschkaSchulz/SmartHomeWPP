@@ -16,7 +16,7 @@ public class LightGesture extends Gesture {
 		System.out.println("Light "+(on ? "on" : "off"));
 		on = !on;
 		
-		switch(activity.mRenderer.room.getID()) {
+		switch(activity.room.getID()) {
 			default:
 				break;
 			case 0:

@@ -10,7 +10,7 @@ public class DebugGesture extends Gesture {
 		this.listener = listener;
 	}
 	public void click(SmartHomeActivity activity) {
-		listener.actionPerformed(action);
+		listener.actionPerformed(action, activity);
 	}
 	public String toString() {
 		return super.toString() + " fires event " + action;
