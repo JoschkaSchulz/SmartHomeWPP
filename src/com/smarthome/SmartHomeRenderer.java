@@ -30,8 +30,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	private BaseObject3D mLivingPlace;
 	
-	private BaseObject3D windowButton1, windowButton2,windowButton3;
-	private BaseObject3D lightButton1, lightButton2,lightButton3;
+	private BaseObject3D windowButton1, windowButton2, windowButton3;
+	private BaseObject3D lightButton1, lightButton2, lightButton3;
 	
 	public SmartHomeActivity activity;
 	
@@ -131,6 +131,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		this.setUpRooms();
 
 		mCamera.setZ(-50.0f);
+		activity.camera.logSource();
 		
 	}
 	
@@ -147,9 +148,5 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public Camera getCamera() {
 		return this.mCamera;
-	}
-	
-	public void moveLP(float x,float y) {
-		mLivingPlace.setPosition(mLivingPlace.getX()+x, mLivingPlace.getY()+y, mLivingPlace.getZ());
 	}
 }
