@@ -44,4 +44,7 @@ public class LightGesture extends Gesture {
 			on = !on;
 		}
 	}
+	public String toString() {
+		return super.toString() + " to light " + action + " (currently " + (on ? "on" : "off") + ")";
+	}
 }
