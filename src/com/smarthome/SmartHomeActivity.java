@@ -93,13 +93,17 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         mLayout.addView(frame);
         mLayout.addView(ll);
         
-        camera.logSource();
-        camera.setTarget(camera.giveSource());
-
         debug.actionPerformed("enter", this);
-    } 
+    }
     
     @Override
+	protected void onStart() {
+		super.onStart();
+        camera.logSource();
+        camera.setTarget(camera.giveSource());
+	}
+
+	@Override
     public boolean onKeyDown(int keycode, KeyEvent event ) {
      if(keycode == KeyEvent.KEYCODE_MENU){
       /*AlertDialog.Builder dialogBuilder 
