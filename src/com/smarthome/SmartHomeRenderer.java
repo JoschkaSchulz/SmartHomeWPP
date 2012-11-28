@@ -68,11 +68,11 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mLivingPlace = objParser.getParsedObject();
 		
 		mLivingPlace.addLight(mLight);	//Add this light for a brighter model
-		mLivingPlace.addLight(mLight0);	//Light(Wohnzimmer)
+		mLivingPlace.addLight(mLight0);	//Light(Esszimmer)
 		mLivingPlace.addLight(mLight1);	//Light(Küche)
-		mLivingPlace.addLight(mLight2);	//Light(Esszimmer)
-		mLivingPlace.addLight(mLight3);	//Light(Schlafzimmer)
-		mLivingPlace.addLight(mLight4);	//Light(Korridor)
+		mLivingPlace.addLight(mLight2);	//Light(Schlafzimmer)
+		mLivingPlace.addLight(mLight3);	//Light(Wohnzimmer)
+		mLivingPlace.addLight(mLight4);	//Light(Flur)
 		
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(1.0f);
