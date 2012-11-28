@@ -35,8 +35,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public SmartHomeActivity activity;
 	
-	public SmartHomeRenderer(Context context) {
+	public SmartHomeRenderer(SmartHomeActivity context) {
 		super(context);
+		activity = context;
 		setFrameRate(50);
 	}
 	
@@ -139,8 +140,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-		
-		this.getCamera().setPosition(activity.room.getX(), activity.room.getY(), -50.0f);
+		if (activity.room != null)
+			this.getCamera().setPosition(activity.room.getX(), activity.room.getY(), -50.0f);
 	}
 	
 	public Camera getCamera() {

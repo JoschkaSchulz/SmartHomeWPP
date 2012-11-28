@@ -137,6 +137,6 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(3).gestures.add(new LightGesture(100,100,700,380, "sleeping_light_color"));
 		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light_color"));
 		
-		this.room = rooms.get(0);
+		room = rooms.get(0);
 	}
 }
