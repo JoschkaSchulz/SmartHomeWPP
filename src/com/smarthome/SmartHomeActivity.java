@@ -6,36 +6,32 @@ import rajawali.RajawaliActivity;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.method.Touch;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.MenuInflater;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
 import android.view.View.OnTouchListener;
+import android.view.View.OnKeyListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener, OnCreateContextMenuListener {
+public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener, OnKeyListener {
 
 	public Room room;
 	public LinkedList<Room> rooms;
 	
-	public boolean isDebug = true;
+	public boolean isDebug = false;
 	public DebugController debug;
 	public static int screenWidth;
 	public static int screenHeight;
 	public SmartHomeRenderer mRenderer;
 	public TextView label;
+	public ImageView image;
 	
 	public void prepareImage(float x1, float y1, float x2, float y2, ImageView image, int ix, int iy) {
 		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
@@ -68,7 +64,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	mRenderer.setSurfaceView(mSurfaceView);
     	super.setRenderer(mRenderer);
     	mSurfaceView.setOnTouchListener(this);
-    	mSurfaceView.setOnCreateContextMenuListener(this);
+    	mSurfaceView.setOnKeyListener(this);
     	
     	LinearLayout ll = new LinearLayout(this);
     	ll.setOrientation(LinearLayout.VERTICAL);
@@ -86,7 +82,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         //ll.addView(label);
         frame.addView(label);
         
-        ImageView image = new ImageView(this);
+        image = new ImageView(this);
         image.setImageResource(R.drawable.debug);
         image.setScaleType(ScaleType.MATRIX);
         prepareImage(0, 0, 800, 480, image, 800, 480);
@@ -94,13 +90,25 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         
         mLayout.addView(frame);
         mLayout.addView(ll);
-    } 
 
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    	super.onCreateContextMenu(menu, v, menuInfo);
-    	MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_smart_home, menu);
-    	System.out.println("TEST!");
+        debug.actionPerformed("enter", this);
+    } 
+    
+    @Override
+    public boolean onKeyDown(int keycode, KeyEvent event ) {
+     if(keycode == KeyEvent.KEYCODE_MENU){
+      /*AlertDialog.Builder dialogBuilder 
+      = new AlertDialog.Builder(this)
+      .setMessage("Test")
+      .setTitle("Menu dialog");
+      dialogBuilder.create().show();*/
+    	 if(isDebug) {
+    		 debug.actionPerformed("leave", this);
+    	 }else{
+    		 debug.actionPerformed("enter", this);
+    	 }
+     }
+     return super.onKeyDown(keycode,event);  
     }
     
 	public boolean onTouch(View v, MotionEvent event) {
@@ -162,5 +170,9 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light_color"));
 		
 		room = rooms.get(0);
+	}
+
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
+		return true;
 	}
 }
