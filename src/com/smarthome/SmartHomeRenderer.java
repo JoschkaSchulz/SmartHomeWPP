@@ -117,11 +117,11 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms.add(new Room(25.5f, -8f, 1));
 		mLight1.setPosition(25.5f, -8f, -2.0f);
 		
-		//Raum: Wohnzimmer
+		//Raum: Schlafzimmer
 		rooms.add(new Room(12.0f, -30.5f, 2));
 		mLight2.setPosition(12.0f, -30.5f, -2.0f);
 		
-		//Raum: Flur
+		//Raum: Wohnzimmer
 		rooms.add(new Room(41.5f, -8f, 3));
 		mLight3.setPosition(41.5f, -8f, -2.0f);
 		
@@ -137,13 +137,13 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(4)));	//Küche	-> Flur
 		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(3)));	//Küche	-> Wohnzimmer
 		
-		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));
+		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));	//Schlafzimmer -> Flur
 		
-		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
+		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));	//Wohnzimmer -> Küche
 		
-		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
-		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));
-		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
+		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));	//Flur -> Esszimmer
+		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms.get(1)));	//Flur -> Küche
+		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));	//Flur -> Schlafzimmer
 		
 		//Füge die Lichtsteuerung hinzu
 		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light_color"));
