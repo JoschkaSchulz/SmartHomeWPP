@@ -13,10 +13,10 @@ public class Room {
 		this.id = id;
 	}
 	
-	public void fire(float x, float y, SmartHomeActivity activity) {
-		for (Gesture gesture: gestures) {
-			gesture.fire(x, y, activity);
-		}
+	public boolean fire(float x, float y, SmartHomeActivity activity) {
+		for (Gesture gesture: gestures)
+			if (gesture.fire(x, y, activity)) return true;
+		return false;
 	}
 	
 	public int getID() {

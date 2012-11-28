@@ -12,8 +12,16 @@ public abstract class Gesture {
 	public boolean match(float x, float y) {
 		return x >= x1 && x <= x2 && y >= y1 && y <= y2;
 	}
-	public void fire(float x, float y, SmartHomeActivity activity) {
-		if (match(x, y)) click(activity);
+	public boolean fire(float x, float y, SmartHomeActivity activity) {
+		if (match(x, y)) {
+			click(activity);
+			System.out.println("Event " + toString() + " fired at [" + x + ", " + y + "]");
+		}
+		else return false;
+		return true;
 	}
 	public abstract void click(SmartHomeActivity activity);
+	public String toString() {
+		return "Gesture: [" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + "]";
+	}
 }

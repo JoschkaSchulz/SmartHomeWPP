@@ -22,7 +22,7 @@ import rajawali.primitives.Cube;
 import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {
-	private PointLight mLight;
+	public PointLight mLight;
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
