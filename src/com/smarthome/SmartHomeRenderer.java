@@ -89,38 +89,38 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	public void setLight0(boolean on) {
-		mLight0.setPower(on ? 0.2f : 0);
+		mLight0.setPower(on ? 5f : 0);
 	}
 	public void setLight1(boolean on) {
-		mLight1.setPower(on ? 0.2f : 0);
+		mLight1.setPower(on ? 5f : 0);
 	}
 	public void setLight2(boolean on) {
-		mLight2.setPower(on ? 0.2f : 0);
+		mLight2.setPower(on ? 5f : 0);
 	}
 	public void setLight3(boolean on) {
-		mLight3.setPower(on ? 0.2f : 0);
+		mLight3.setPower(on ? 5f : 0);
 	}
 	public void setLight4(boolean on) {
-		mLight4.setPower(on ? 0.2f : 0);
+		mLight4.setPower(on ? 5f : 0);
 	}
 	
 	private void setUpRooms() {
 		//Füge Räume hinzu
 		
 		//Raum: Esszimmer
-		mLight0.setPosition(7f, -8f, -2.0f);
+		mLight0.setPosition(7f, -8f, -15.0f);
 		
 		//Raum: Küche
-		mLight1.setPosition(25.5f, -8f, -2.0f);
+		mLight1.setPosition(25.5f, -8f, -15.0f);
 		
 		//Raum: Schlafzimmer
-		mLight2.setPosition(12.0f, -30.5f, -2.0f);
+		mLight2.setPosition(12.0f, -30.5f, -15.0f);
 		
 		//Raum: Wohnzimmer
-		mLight3.setPosition(41.5f, -8f, -2.0f);
+		mLight3.setPosition(41.5f, -8f, -15.0f);
 		
 		//Raum: Flur
-		mLight4.setPosition(17.5f, -19f, -2.0f);
+		mLight4.setPosition(17.5f, -19f, -15.0f);
 	}
 	
 	public void initScene() {
