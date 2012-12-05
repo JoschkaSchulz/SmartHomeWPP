@@ -6,7 +6,7 @@ public class CameraController {
 	public SmartHomeActivity activity;
 	private float t;
 	private long timestamp;
-	private float duration = 1500;
+	private float duration = 750;
 	private float[] p0 = new float[6], p1 = new float[6],
 			p2 = new float[6], p3 = new float[6];
 	private Camera src = new Camera();
