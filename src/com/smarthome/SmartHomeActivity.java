@@ -41,10 +41,10 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		x1 = g.x1; y1 = g.y1; x2 = g.x2; y2 = g.y2;
 		float sx = (x2 - x1) / ix;
 		float sy = (y2 - y1) / iy;
-		Matrix matrix = new Matrix();
-		matrix.setScale(sx, sy);
-		matrix.setTranslate(x1, y1);
-		image.setImageMatrix(matrix);
+		//Matrix matrix = new Matrix();
+		//matrix.setScale(sx, sy);
+		//matrix.setTranslate(x1, y1);
+		//image.setImageMatrix(matrix);
 		LayoutParams lp = new LayoutParams((int)(x2 - x1), (int)(y2 - y1));
 		lp.setMargins((int)x1, (int)y1, 0, 0);
 		image.setLayoutParams(lp);
@@ -90,7 +90,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         image.setImageResource(R.drawable.debug);
         //image.setAdjustViewBounds(true);
         prepareImage(0, 0, 800, 480, image, 800, 480);
-        image.setScaleType(ScaleType.MATRIX);
+        image.setScaleType(ScaleType.FIT_XY);
         imagePane.addView(image);
         
         mLayout.addView(frame);
