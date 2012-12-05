@@ -40,6 +40,13 @@ public class CameraController {
 		return cam;
 	}
 	
+	public Camera giveTarget() {
+		Camera cam = new Camera();
+		cam.setPosition(tar.getPosition());
+		cam.setRotation(tar.getRotation());
+		return cam;
+	}
+	
 	public void setTarget(Camera target) {
 		tar = target;
 	}
@@ -70,7 +77,7 @@ public class CameraController {
 	}
 	
 	public void createRelativeDisplacement(float x, float y, float z, float rotX, float rotY, float rotZ) {
-		Camera cam = giveSource();
+		Camera cam = giveTarget();
 		cam.setX(cam.getX() + x);
 		cam.setY(cam.getY() + y);
 		cam.setZ(cam.getZ() + z);
