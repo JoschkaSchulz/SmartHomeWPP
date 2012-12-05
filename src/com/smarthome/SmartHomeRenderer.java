@@ -1,27 +1,11 @@
 package com.smarthome;
 
-import java.util.LinkedList;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import rajawali.BaseObject3D;
 import rajawali.Camera;
-import rajawali.lights.ALight;
-import rajawali.lights.DirectionalLight;
-import rajawali.lights.PointLight;
-import rajawali.materials.CubeMapMaterial;
-import rajawali.materials.DiffuseMaterial;
-import rajawali.materials.PhongMaterial;
-import rajawali.materials.SimpleMaterial;
-import rajawali.materials.ToonMaterial;
-import rajawali.parser.Max3DSParser;
 import rajawali.parser.ObjParser;
-import rajawali.primitives.Cube;
 import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {	

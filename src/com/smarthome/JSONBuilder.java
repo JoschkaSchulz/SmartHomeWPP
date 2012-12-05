@@ -7,8 +7,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class JSONBuilder {
 	
 	public static String light(String action, int red, int green, int blue, int fadetime) {

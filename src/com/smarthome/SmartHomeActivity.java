@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import rajawali.RajawaliActivity;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -12,13 +11,12 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.View.OnKeyListener;
-import android.widget.FrameLayout.LayoutParams;
+import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SmartHomeActivity extends RajawaliActivity implements OnTouchListener, OnKeyListener {
@@ -36,17 +34,17 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	
 	public CameraController camera = new CameraController();
 	
-	public void prepareImage(float x1, float y1, float x2, float y2, ImageView image, int ix, int iy) {
+	public void prepareImage(int x1, int y1, int x2, int y2, ImageView image, int ix, int iy) {
 		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
-		x1 = g.x1; y1 = g.y1; x2 = g.x2; y2 = g.y2;
-		float sx = (x2 - x1) / ix;
-		float sy = (y2 - y1) / iy;
+		x1 = (int)g.x1; y1 = (int)g.y1; x2 = (int)g.x2; y2 = (int)g.y2;
+		//float sx = (x2 - x1) / ix;
+		//float sy = (y2 - y1) / iy;
 		//Matrix matrix = new Matrix();
 		//matrix.setScale(sx, sy);
 		//matrix.setTranslate(x1, y1);
 		//image.setImageMatrix(matrix);
-		LayoutParams lp = new LayoutParams((int)(x2 - x1), (int)(y2 - y1));
-		lp.setMargins((int)x1, (int)y1, 0, 0);
+		LayoutParams lp = new LayoutParams(x2 - x1, y2 - y1);
+		lp.setMargins(x1, y1, 0, 0);
 		image.setLayoutParams(lp);
 	}
 	
