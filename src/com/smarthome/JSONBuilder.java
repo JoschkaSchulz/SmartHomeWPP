@@ -24,7 +24,26 @@ public class JSONBuilder {
 		aendernMap.put("values", jsov);
 		aendernMap.put("Id", "client_1578909153");
 		aendernMap.put("Version", null);
-		aendernMap.put("action", action);
+		aendernMap.put("action", action + "_color");
+		JSONArray jsoa = new JSONArray(Arrays.asList(new Integer[]{1,2,3}));
+		aendernMap.put("anAry", jsoa );
+		JSONObject msgFarbeEsszimmerAendern = new JSONObject(aendernMap);
+		return msgFarbeEsszimmerAendern.toString();
+	}
+	
+	public static String light(String action, boolean on, int intensity) {
+		
+		Map<String,String> valueMap = new HashMap<String, String>();
+		if (on) valueMap.put("intensity",Integer.toString(intensity));
+		
+		Map<String,Object> aendernMap = new HashMap<String, Object>();
+		
+		JSONObject jsov = new JSONObject(valueMap);
+		
+		aendernMap.put("values", jsov);
+		aendernMap.put("Id", "client_1578909153");
+		aendernMap.put("Version", null);
+		aendernMap.put("action", action + (on ? "_on" : "_off"));
 		JSONArray jsoa = new JSONArray(Arrays.asList(new Integer[]{1,2,3}));
 		aendernMap.put("anAry", jsoa );
 		JSONObject msgFarbeEsszimmerAendern = new JSONObject(aendernMap);

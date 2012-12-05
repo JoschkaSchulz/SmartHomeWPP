@@ -76,13 +76,13 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		l = new LightController();
 		l.light.setPosition(12.0f, -30.5f, -15.0f);
-		l.addRole("lounge_light_color");
+		l.addRole("sleeping_light_color");
 		l.addRole("wohnung");
 		l.publish();
 		
 		l = new LightController();
 		l.light.setPosition(41.5f, -8f, -15.0f);
-		l.addRole("sleeping_light_color");
+		l.addRole("lounge_light_color");
 		l.addRole("wohnung");
 		l.publish();
 		
@@ -136,7 +136,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		this.setUpLivingPlaceModel();
 
-		mCamera.setZ(-50.0f);
+		mCamera.setZ(-35.0f);
 		activity.camera.logSource(true);
 		
 	}
