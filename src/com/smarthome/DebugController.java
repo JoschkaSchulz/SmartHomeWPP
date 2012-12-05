@@ -58,7 +58,7 @@ public class DebugController extends Room implements ActionListener {
 				activity.mRenderer.getCamera().getRotY() + ", " +
 				activity.mRenderer.getCamera().getRotZ() + "]";
 		case 1:
-			return "[" + activity.mRenderer.mLight.getX() + ", " + activity.mRenderer.mLight.getY() + ", " + activity.mRenderer.mLight.getZ() + "]:" + activity.mRenderer.mLight.getPower();
+			return "";//"[" + activity.mRenderer.mLight.getX() + ", " + activity.mRenderer.mLight.getY() + ", " + activity.mRenderer.mLight.getZ() + "]:" + activity.mRenderer.mLight.getPower();
 		}
 		return "unknown";
 	}
@@ -108,11 +108,12 @@ public class DebugController extends Room implements ActionListener {
 			if (element == 3) activity.camera.createRelativeDisplacement(0, 0, 0, change, 0, 0);
 			if (element == 4) activity.camera.createRelativeDisplacement(0, 0, 0, 0, change, 0);
 			if (element == 5) activity.camera.createRelativeDisplacement(0, 0, 0, 0, 0, change);
-		}
+		}/*
 		if (mode == 1 && element == 0) activity.mRenderer.mLight.setX(activity.mRenderer.mLight.getX() + change);
 		if (mode == 1 && element == 1) activity.mRenderer.mLight.setY(activity.mRenderer.mLight.getY() + change);
 		if (mode == 1 && element == 2) activity.mRenderer.mLight.setZ(activity.mRenderer.mLight.getZ() + change);
 		if (mode == 1 && element == 3) activity.mRenderer.mLight.setPower(activity.mRenderer.mLight.getPower() + change);
+		*/
 		updateMessage();
 		if (messageUpdated) {
 			activity.label.setText(message);

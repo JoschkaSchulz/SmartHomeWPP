@@ -1,7 +1,5 @@
 package com.smarthome;
 
-import android.graphics.AvoidXfermode;
-
 public class LightGesture extends Gesture {
 	private boolean on = false;
 	private String action;
@@ -16,24 +14,8 @@ public class LightGesture extends Gesture {
 		System.out.println("Light "+(on ? "on" : "off"));
 		on = !on;
 		
-		switch(activity.room.getID()) {
-			default:
-				break;
-			case 0:
-				activity.mRenderer.setLight0(on);
-				break;
-			case 1:
-				activity.mRenderer.setLight1(on);
-				break;
-			case 2:
-				activity.mRenderer.setLight2(on);
-				break;
-			case 3:
-				activity.mRenderer.setLight3(on);
-				break;
-			case 4:
-				activity.mRenderer.setLight4(on);
-				break;
+		for (LightController lc : LightController.byRole(action)) {
+			lc.light.setPower(on ? 5f : 0f);
 		}
 		
 		try {

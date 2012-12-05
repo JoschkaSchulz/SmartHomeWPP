@@ -24,10 +24,8 @@ import rajawali.parser.ObjParser;
 import rajawali.primitives.Cube;
 import rajawali.renderer.RajawaliRenderer;
 
-public class SmartHomeRenderer extends RajawaliRenderer {
-	public PointLight mLight;
-	private PointLight sun0, sun1, sun2, sun3, sun4;
-	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
+public class SmartHomeRenderer extends RajawaliRenderer {	
+	private LightController l;
 	
 	private BaseObject3D mLivingPlace;
 	
@@ -42,38 +40,76 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		setFrameRate(50);
 	}
 	
-	private void setSun() {
+	private void setAmbient() {
+		l = new LightController();
+		l.light.setPosition(25.5f, -19f, -100.0f);
+		l.addRole("ambient");
+		l.publish();
+		
+		//West
+		l = new LightController();
+		l.light.setPosition(-10f, -20f, -100.0f);
+		l.addRole("ambient");
+		l.publish();
+		
+		//North
+		l = new LightController();
+		l.light.setPosition(30f, -20f, -100.0f);
+		l.addRole("ambient");
+		l.publish();
+		
+		//East
+		l = new LightController();
+		l.light.setPosition(70f, 20f, -100.0f);
+		l.addRole("ambient");
+		l.publish();
+		
+		//South
+		l = new LightController();
+		l.light.setPosition(20f, 60f, -100.0f);
+		l.addRole("ambient");
+		l.publish();
 		
 	}
 	
 	private void setUpLights() {
-		LightController l;
 		l = new LightController();
-		l.light.setPosition(1f, 0.2f, -400.0f);
-		l.addRole("ambient");
-		for (LightController lc : LightController.byRole("ambient")) {
-			lc.light.setPower(25f);
+		l.light.setPosition(7f, -8f, -15.0f);
+		l.addRole("dining_light_color");
+		l.addRole("wohnung");
+		l.publish();
+		
+		l = new LightController();
+		l.light.setPosition(25.5f, -8f, -15.0f);
+		l.addRole("kitchen_light_color");
+		l.addRole("wohnung");
+		l.publish();
+		
+		l = new LightController();
+		l.light.setPosition(12.0f, -30.5f, -15.0f);
+		l.addRole("lounge_light_color");
+		l.addRole("wohnung");
+		l.publish();
+		
+		l = new LightController();
+		l.light.setPosition(41.5f, -8f, -15.0f);
+		l.addRole("sleeping_light_color");
+		l.addRole("wohnung");
+		l.publish();
+		
+		l = new LightController();
+		l.light.setPosition(17.5f, -19f, -15.0f);
+		l.addRole("corridor_light_color");
+		l.addRole("wohnung");
+		l.publish();
+		
+		for (LightController lc : LightController.byRole("wohnung")) {
+			lc.light.setPower(0f);
 		}
 		
-		
-		mLight = new PointLight();
-		mLight.setPosition(1f, 0.2f, -400.0f);
-		mLight.setPower(25f); 
-		
-		mLight0 = new PointLight();
-		mLight0.setPower(0);
-		
-		mLight1 = new PointLight(); 
-		mLight1.setPower(0);
-		
-		mLight2 = new PointLight();
-		mLight2.setPower(0);
-		
-		mLight3 = new PointLight();
-		mLight3.setPower(0);
-		 
-		mLight4 = new PointLight();
-		mLight4.setPower(0);
+		for (LightController lc : LightController.byRole("ambient")) {
+			lc.light.setPower(220f);
+		}
 	}
 	
 	private void setUpLivingPlaceModel() {
@@ -81,12 +117,9 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
 		
-		mLivingPlace.addLight(mLight);	//Add this light for a brighter model
-		mLivingPlace.addLight(mLight0);	//Light(Esszimmer)
-		mLivingPlace.addLight(mLight1);	//Light(Küche)
-		mLivingPlace.addLight(mLight2);	//Light(Schlafzimmer)
-		mLivingPlace.addLight(mLight3);	//Light(Wohnzimmer)
-		mLivingPlace.addLight(mLight4);	//Light(Flur)
+		for (LightController lc : LightController.lights) {
+			mLivingPlace.addLight(lc.light);	//Add this light for a brighter model
+		}
 		
 		addChild(mLivingPlace);
 		mLivingPlace.setScale(1.0f);
@@ -102,49 +135,12 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 //		mLivingPlace.setColor(0xff666666);
 	}
 	
-	public void setLight0(boolean on) {
-		mLight0.setPower(on ? 5f : 0);
-	}
-	public void setLight1(boolean on) {
-		mLight1.setPower(on ? 5f : 0);
-	}
-	public void setLight2(boolean on) {
-		mLight2.setPower(on ? 5f : 0);
-	}
-	public void setLight3(boolean on) {
-		mLight3.setPower(on ? 5f : 0);
-	}
-	public void setLight4(boolean on) {
-		mLight4.setPower(on ? 5f : 0);
-	}
-	
-	private void setUpRooms() {
-		//Füge Räume hinzu
-		
-		//Raum: Esszimmer
-		mLight0.setPosition(7f, -8f, -15.0f);
-		
-		//Raum: Küche
-		mLight1.setPosition(25.5f, -8f, -15.0f);
-		
-		//Raum: Schlafzimmer
-		mLight2.setPosition(12.0f, -30.5f, -15.0f);
-		
-		//Raum: Wohnzimmer
-		mLight3.setPosition(41.5f, -8f, -15.0f);
-		
-		//Raum: Flur
-		mLight4.setPosition(17.5f, -19f, -15.0f);
-	}
-	
 	public void initScene() {
-		this.setSun();
+		this.setAmbient();
 		
 		this.setUpLights();
 		
 		this.setUpLivingPlaceModel();
-		
-		this.setUpRooms();
 
 		mCamera.setZ(-50.0f);
 		activity.camera.logSource();
