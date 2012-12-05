@@ -44,30 +44,35 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		l = new LightController();
 		l.light.setPosition(25.5f, -19f, -100.0f);
 		l.addRole("ambient");
+		l.addRole("top");
 		l.publish();
 		
 		//West
 		l = new LightController();
-		l.light.setPosition(-10f, -20f, -100.0f);
+		l.light.setPosition(-90f, 20f, -15.0f);
 		l.addRole("ambient");
+		l.addRole("side");
 		l.publish();
 		
 		//North
 		l = new LightController();
-		l.light.setPosition(30f, -20f, -100.0f);
+		l.light.setPosition(30f, -100f, -15.0f);
 		l.addRole("ambient");
+		l.addRole("side");
 		l.publish();
 		
 		//East
 		l = new LightController();
-		l.light.setPosition(70f, 20f, -100.0f);
+		l.light.setPosition(150f, 20f, -15.0f);
 		l.addRole("ambient");
+		l.addRole("side");
 		l.publish();
 		
 		//South
 		l = new LightController();
-		l.light.setPosition(20f, 60f, -100.0f);
+		l.light.setPosition(20f, 140f, -15.0f);
 		l.addRole("ambient");
+		l.addRole("side");
 		l.publish();
 		
 	}
@@ -107,9 +112,14 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 			lc.light.setPower(0f);
 		}
 		
-		for (LightController lc : LightController.byRole("ambient")) {
+		for (LightController lc : LightController.byRole("top")) {
 			lc.light.setPower(220f);
 		}
+		
+		for (LightController lc : LightController.byRole("side")) {
+			lc.light.setPower(50f);
+		}
+		
 	}
 	
 	private void setUpLivingPlaceModel() {

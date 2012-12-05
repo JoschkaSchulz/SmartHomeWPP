@@ -88,8 +88,9 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         
         image = new ImageView(this);
         image.setImageResource(R.drawable.debug);
-        image.setScaleType(ScaleType.MATRIX);
+        image.setAdjustViewBounds(true);
         prepareImage(0, 0, 800, 480, image, 800, 480);
+        image.setScaleType(ScaleType.MATRIX);
         ll.addView(image);
         
         mLayout.addView(frame);
