@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.View.OnKeyListener;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -44,6 +45,9 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		matrix.setScale(sx, sy);
 		matrix.setTranslate(x1, y1);
 		image.setImageMatrix(matrix);
+		LayoutParams lp = new LayoutParams((int)(x2 - x1), (int)(y2 - y1));
+		lp.setMargins((int)x1, (int)y1, 0, 0);
+		image.setLayoutParams(lp);
 	}
 	
     @Override
@@ -70,12 +74,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	mSurfaceView.setOnTouchListener(this);
     	mSurfaceView.setOnKeyListener(this);
     	
-    	LinearLayout ll = new LinearLayout(this);
-    	ll.setOrientation(LinearLayout.VERTICAL);
-        ll.setGravity(Gravity.TOP);
-        
+    	FrameLayout imagePane = new FrameLayout(this);
         FrameLayout frame = new FrameLayout(this);
-        
         
         label = new TextView(this);
         label.setText("Info:");
@@ -88,13 +88,13 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         
         image = new ImageView(this);
         image.setImageResource(R.drawable.debug);
-        image.setAdjustViewBounds(true);
+        //image.setAdjustViewBounds(true);
         prepareImage(0, 0, 800, 480, image, 800, 480);
         image.setScaleType(ScaleType.MATRIX);
-        ll.addView(image);
+        imagePane.addView(image);
         
         mLayout.addView(frame);
-        mLayout.addView(ll);
+        mLayout.addView(imagePane);
         
         debug.actionPerformed("enter", this);
     }
