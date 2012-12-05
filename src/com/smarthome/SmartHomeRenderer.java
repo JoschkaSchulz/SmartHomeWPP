@@ -64,31 +64,31 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	private void setUpLights() {
 		l = new LightController();
 		l.light.setPosition(7f, -8f, -15.0f);
-		l.addRole("dining_light_color");
+		l.addRole("dining_light");
 		l.addRole("wohnung");
 		l.publish();
 		
 		l = new LightController();
 		l.light.setPosition(25.5f, -8f, -15.0f);
-		l.addRole("kitchen_light_color");
+		l.addRole("kitchen_main_light");
 		l.addRole("wohnung");
 		l.publish();
 		
 		l = new LightController();
 		l.light.setPosition(12.0f, -30.5f, -15.0f);
-		l.addRole("sleeping_light_color");
+		l.addRole("sleeping_light");
 		l.addRole("wohnung");
 		l.publish();
 		
 		l = new LightController();
 		l.light.setPosition(41.5f, -8f, -15.0f);
-		l.addRole("lounge_light_color");
+		l.addRole("lounge_light");
 		l.addRole("wohnung");
 		l.publish();
 		
 		l = new LightController();
 		l.light.setPosition(17.5f, -19f, -15.0f);
-		l.addRole("corridor_light_color");
+		l.addRole("corridor_light");
 		l.addRole("wohnung");
 		l.publish();
 		
