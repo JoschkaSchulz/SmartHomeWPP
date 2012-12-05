@@ -27,6 +27,7 @@ public class LightGesture extends Gesture {
 			System.out.println("Senden Fehlgeschlagen");
 			on = !on;
 		}
+		super.click(activity);
 	}
 	public String toString() {
 		return super.toString() + " to light " + action + " (currently " + (on ? "on" : "off") + ")";

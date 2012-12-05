@@ -4,11 +4,11 @@ import rajawali.Camera;
 
 public class CameraController {
 	public SmartHomeActivity activity;
-	private float t;
+//	private float t;
 	private long timestamp;
 	private float duration = 750;
-	private float[] p0 = new float[6], p1 = new float[6],
-			p2 = new float[6], p3 = new float[6];
+/*	private float[] p0 = new float[6], p1 = new float[6],
+			p2 = new float[6], p3 = new float[6];*/
 	public Camera src = new Camera();
 	public Camera tar = new Camera();
 	
@@ -24,7 +24,7 @@ public class CameraController {
 	}
 	
 	public void logSource(boolean effort) {
-		t = 0;
+		//t = 0;
 		timestamp = System.currentTimeMillis();
 		src.setPosition(activity.mRenderer.getCamera().getPosition());
 		src.setRotation(activity.mRenderer.getCamera().getRotation());

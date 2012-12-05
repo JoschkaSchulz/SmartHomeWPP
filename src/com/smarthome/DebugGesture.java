@@ -11,6 +11,7 @@ public class DebugGesture extends Gesture {
 	}
 	public void click(SmartHomeActivity activity) {
 		listener.actionPerformed(action, activity);
+		super.click(activity);
 	}
 	public String toString() {
 		return super.toString() + " fires event " + action;
