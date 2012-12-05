@@ -81,9 +81,9 @@ public class CameraController {
 		cam.setX(cam.getX() + x);
 		cam.setY(cam.getY() + y);
 		cam.setZ(cam.getZ() + z);
-		cam.setRotX(cam.getRotX() + x);
-		cam.setRotY(cam.getRotY() + y);
-		cam.setRotZ(cam.getRotZ() + z);
+		cam.setRotX(cam.getRotX() + rotX);
+		cam.setRotY(cam.getRotY() + rotY);
+		cam.setRotZ(cam.getRotZ() + rotZ);
 		setTarget(cam);
 	}
 }
