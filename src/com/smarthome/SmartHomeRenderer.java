@@ -42,6 +42,15 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	private void setUpLights() {
+		LightController l;
+		l = new LightController();
+		l.light.setPosition(1f, 0.2f, -400.0f);
+		l.addRole("ambient");
+		for (LightController lc : LightController.byRole("ambient")) {
+			lc.light.setPower(25f);
+		}
+		
+		
 		mLight = new PointLight();
 		mLight.setPosition(1f, 0.2f, -400.0f);
 		mLight.setPower(25f); 
