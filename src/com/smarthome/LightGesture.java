@@ -1,5 +1,6 @@
 package com.smarthome;
 
+
 public class LightGesture extends Gesture {
 	private boolean on = false;
 	private String action;
@@ -20,7 +21,8 @@ public class LightGesture extends Gesture {
 		
 		try {
 			sendMessageToProxy send = new sendMessageToProxy();
-			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
+//			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
+			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
 			on = !on;
