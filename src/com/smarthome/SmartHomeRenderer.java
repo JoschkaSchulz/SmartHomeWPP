@@ -26,6 +26,7 @@ import rajawali.renderer.RajawaliRenderer;
 
 public class SmartHomeRenderer extends RajawaliRenderer {
 	public PointLight mLight;
+	private PointLight sun0, sun1, sun2, sun3, sun4;
 	private PointLight mLight0, mLight1, mLight2, mLight3, mLight4;
 	
 	private BaseObject3D mLivingPlace;
@@ -39,6 +40,10 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		super(context);
 		activity = context;
 		setFrameRate(50);
+	}
+	
+	private void setSun() {
+		
 	}
 	
 	private void setUpLights() {
@@ -124,6 +129,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	}
 	
 	public void initScene() {
+		this.setSun();
+		
 		this.setUpLights();
 		
 		this.setUpLivingPlaceModel();
