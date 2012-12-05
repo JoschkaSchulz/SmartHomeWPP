@@ -51,12 +51,12 @@ public class DebugController extends Room implements ActionListener {
 	public String getInfo() {
 		switch (mode) {
 		case 0:
-			return "[" + activity.mRenderer.getCamera().getX() + ", " +
-				activity.mRenderer.getCamera().getY() + ", " +
-				activity.mRenderer.getCamera().getZ() + ", " +
-				activity.mRenderer.getCamera().getRotX() + ", " +
-				activity.mRenderer.getCamera().getRotY() + ", " +
-				activity.mRenderer.getCamera().getRotZ() + "]";
+			return "[" + activity.camera.tar.getX() + ", " +
+				activity.camera.tar.getY() + ", " +
+				activity.camera.tar.getZ() + ", " +
+				activity.camera.tar.getRotX() + ", " +
+				activity.camera.tar.getRotY() + ", " +
+				activity.camera.tar.getRotZ() + "]";
 		case 1:
 			return "";//"[" + activity.mRenderer.mLight.getX() + ", " + activity.mRenderer.mLight.getY() + ", " + activity.mRenderer.mLight.getZ() + "]:" + activity.mRenderer.mLight.getPower();
 		}
@@ -101,7 +101,7 @@ public class DebugController extends Room implements ActionListener {
 		if (action.equals(">>")) change = 5;
 		if (mode == 0 && change != 0) {
 			activity.room = null;
-			activity.camera.logSource();
+			activity.camera.logSource(false);
 			if (element == 0) activity.camera.createRelativeDisplacement(change, 0, 0, 0, 0, 0);
 			if (element == 1) activity.camera.createRelativeDisplacement(0, change, 0, 0, 0, 0);
 			if (element == 2) activity.camera.createRelativeDisplacement(0, 0, change, 0, 0, 0);

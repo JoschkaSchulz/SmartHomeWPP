@@ -9,8 +9,8 @@ public class CameraController {
 	private float duration = 750;
 	private float[] p0 = new float[6], p1 = new float[6],
 			p2 = new float[6], p3 = new float[6];
-	private Camera src = new Camera();
-	private Camera tar = new Camera();
+	public Camera src = new Camera();
+	public Camera tar = new Camera();
 	
 	public boolean ready() {
 		return src != null && tar != null;
@@ -23,14 +23,15 @@ public class CameraController {
 		return tn * tn2 * p0 + 3 * tn2 * t * p1 + 3 * tn * t2 * p2 + t2 * t * p3;
 	}
 	
-	public void logSource() {
+	public void logSource(boolean effort) {
 		t = 0;
 		timestamp = System.currentTimeMillis();
 		src.setPosition(activity.mRenderer.getCamera().getPosition());
 		src.setRotation(activity.mRenderer.getCamera().getRotation());
-		tar.setPosition(src.getPosition());
-		tar.setRotation(src.getRotation());
-		
+		if (effort) {
+			tar.setPosition(src.getPosition());
+			tar.setRotation(src.getRotation());
+		}
 	}
 	
 	public Camera giveSource() {
