@@ -89,7 +89,11 @@ public class DebugController extends Room implements ActionListener {
 			activity.image.setVisibility(View.INVISIBLE);
 			activity.label.setText("Info:");
 			activity.isDebug = false;
-			if (activity.room == null) activity.room = activity.rooms.get(0);
+			if (activity.room == null) {
+				activity.room = activity.rooms.get(0);
+				activity.room.appear(activity);
+				activity.room.moveTo(activity);
+			}
 			return;
 		}
 		if (action.equals("mode")) addMode();
@@ -100,6 +104,8 @@ public class DebugController extends Room implements ActionListener {
 		if (action.equals(">")) change = 1;
 		if (action.equals(">>")) change = 5;
 		if (mode == 0 && change != 0) {
+			if (activity.room != null)
+				activity.room.disappear(activity);
 			activity.room = null;
 			activity.camera.logSource(false);
 			if (element == 0) activity.camera.createRelativeDisplacement(change, 0, 0, 0, 0, 0);

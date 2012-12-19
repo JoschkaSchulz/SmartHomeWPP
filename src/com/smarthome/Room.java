@@ -29,6 +29,11 @@ public class Room {
 		return this.id;
 	}
 	
+	public void moveTo(SmartHomeActivity activity) {
+		activity.camera.logSource(true);
+		activity.camera.setTarget(camera);
+	}
+	
 	public void appear(SmartHomeActivity activity) {
 		for (Gesture gesture: gestures)
 			gesture.appear(activity);

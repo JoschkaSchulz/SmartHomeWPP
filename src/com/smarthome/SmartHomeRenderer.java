@@ -156,8 +156,8 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		
 		this.setUpLivingPlaceModel();
 
-		mCamera.setZ(-35.0f);
 		activity.camera.logSource(true);
+		activity.room.moveTo(activity);
 		
         activity.initializationState |= 64;
 	}
