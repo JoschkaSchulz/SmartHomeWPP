@@ -59,6 +59,10 @@ public abstract class Gesture {
 	        images.add(image); 
 		}
 	}
+	public void moveSample(SmartHomeActivity activity, float x1, float y1, float x2, float y2) {
+		if (images.size() > 0)
+			activity.prepareImageScaled((int)x1, (int)y1, (int)x2, (int)y2, images.get(0), 128, 128);
+	}
 	public void appear(SmartHomeActivity activity) {
 		
 	}

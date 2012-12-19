@@ -126,4 +126,7 @@ public class DebugController extends Room implements ActionListener {
 			messageUpdated = false;
 		}
 	}
+	public void actionPerformed(String action, SmartHomeActivity activity, float x, float y) {
+		actionPerformed(action, activity);
+	}
 }

@@ -149,7 +149,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	}
 
 	private float oldX, oldY;
-	private float newX, newY;
+	public float newX, newY;
 	private boolean firedHandler;
 	private Timer longClick;
 

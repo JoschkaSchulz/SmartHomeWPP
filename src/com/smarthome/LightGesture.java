@@ -1,11 +1,11 @@
 package com.smarthome;
 
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
-
 
 public class LightGesture extends Gesture {
-	private boolean on = false;
+	public boolean on = false;
+	public int red = 255;
+	public int green = 255;
+	public int blue = 255;
 	private String action;
 	
 	public LightGesture() {}
@@ -33,12 +33,18 @@ public class LightGesture extends Gesture {
 		
 		try {
 			sendMessageToProxy send = new sendMessageToProxy();
-//			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? 255 : 0, on ? 255 : 0, on ? 255 : 0, 0));	
-			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
+			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
+//			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
 			this.on = !on;
 		}
+	}
+	public void setColor(int red, int green, int blue) {
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+		setLight(true);
 	}
 	public String toString() {
 		return super.toString() + " to light " + action + " (currently " + (on ? "on" : "off") + ")";
