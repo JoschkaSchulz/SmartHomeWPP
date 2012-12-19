@@ -38,6 +38,9 @@ public class Room {
 	
 	public void moveTo(SmartHomeActivity activity) {
 		activity.camera.logSource(true);
+		Camera camera = activity.camera.giveTarget();
+		camera.setPosition(this.camera.getPosition());
+		camera.setRotation(this.camera.getRotation());
 		activity.camera.setTarget(camera);
 	}
 	
