@@ -1,6 +1,8 @@
 package com.smarthome;
 
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import rajawali.RajawaliActivity;
 import android.graphics.Color;
@@ -113,6 +115,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         mLayout.addView(imagePane);
         
         debug.actionPerformed("enter", this);
+
+        room.appear(this);
         initializationState |= 1;
     }
 
@@ -133,29 +137,45 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
      return super.onKeyDown(keycode,event);  
     }
     
-	private long start;
-	int oldX;
-	int oldY;
-	int newX;
-	int newY;
-	boolean 
-	timer
-	up
+	private float oldX, oldY;
+	private float newX, newY;
+	private boolean firedHandler;
+	private Timer longClick;
 	
-	public boolean onTouch(View v, MotionEvent event) {
-		System.out.println("Event: "+event.toString());
+	public boolean onTouch(View v, final MotionEvent event) {
+		Timer longClick = new Timer();
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
-			start = System.currentTimeMillis();
+			firedHandler = false;
+			oldX = event.getX();
+			oldY = event.getY();
+			longClick.schedule(new TimerTask() {		
+				@Override
+				public void run() {
+					SmartHomeActivity.this.click(true);
+				}
+			}, 400);
 		}else if(event.getAction() == MotionEvent.ACTION_UP) {
-			
-			System.out.println("TIME CLICKED: "+(start-System.currentTimeMillis()));
-			
-			if (isDebug && mRenderer != null)
-				debug.fire(event.getX(), event.getY(), this);
-			else if (room != null)
-				room.fire(event.getX(), event.getY(), this);
+			newX = event.getX();
+			newY = event.getY();
+			longClick.cancel();
+			click(false);
+		}else if(event.getAction() == MotionEvent.ACTION_MOVE) {
+			newX = event.getX();
+			newY = event.getY();
 		}
 		return true;
+	}
+	
+	public void click(boolean isLong) {
+		if(!firedHandler) {
+			firedHandler = true;
+			System.out.println("~~~"+((isLong)?"Long ":"")+"Click~~~");
+			
+			if (isDebug && mRenderer != null)
+				debug.fire(newX, newY, this, isLong);
+			else if (room != null)
+				room.fire(newX, newY, this, isLong);
+		}
 	}
 
 	private void setUpRooms() {
@@ -207,7 +227,6 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light"));
 		
 		room = rooms.get(0);
-		room.appear(this);
 		
         initializationState |= 2;
 	}
