@@ -60,7 +60,10 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void onDestroy() {
 		super.onDestroy();
 
+		//New try for closing it complete
 		android.os.Process.killProcess(android.os.Process.myPid());
+		
+		//Works on smartphone well, doesn'T work on galaxy tab 2 Oo
 //		finish();
 //		System.exit(0);
 	}
