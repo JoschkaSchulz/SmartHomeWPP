@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import rajawali.RajawaliActivity;
+import android.R.integer;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -181,6 +182,30 @@ public class SmartHomeActivity extends RajawaliActivity implements
 			firedHandler = true;
 			System.out.println("~~~" + ((isLong) ? "Long " : "") + "Click~~~");
 
+			float distX = Math.abs(newX - oldX);
+			float distY = Math.abs(newY - oldY);
+			if (Math.max(distX, distY) > screenWidth / 8) {
+				String gestureStr = "";
+				if (distX > distY) {
+					if (distX > 0)
+						gestureStr = "right";
+					else
+						gestureStr = "left";
+				} else {
+					if (distY > 0)
+						gestureStr = "down";
+					else
+						gestureStr = "up";
+				}
+				if (isDebug && mRenderer != null)
+					;
+				else if (isSlider && mRenderer != null)
+					;
+				else if (room != null)
+					room.gesture(this, gestureStr);
+
+			}
+			
 			if (isDebug && mRenderer != null)
 				debug.fire(newX, newY, this, isLong);
 			else if (isSlider && mRenderer != null)
@@ -224,29 +249,29 @@ public class SmartHomeActivity extends RajawaliActivity implements
 
 		// Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
-				.get(1))); // Esszimmer -> Küche
+				.get(1), "left")); // Esszimmer -> Küche
 		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
-				.get(4))); // Esszimmer -> Flur
+				.get(4), "up")); // Esszimmer -> Flur
 
 		rooms.get(1).gestures
-				.add(new RoomGesture(0, 0, 100, 480, rooms.get(0))); // Küche ->
+				.add(new RoomGesture(0, 0, 100, 480, rooms.get(0), "right")); // Küche ->
 																		// Esszimmer
 		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
-				.get(4))); // Küche -> Flur
+				.get(4), "up")); // Küche -> Flur
 		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
-				.get(3))); // Küche -> Wohnzimmer
+				.get(3), "left")); // Küche -> Wohnzimmer
 
 		rooms.get(2).gestures
-				.add(new RoomGesture(0, 0, 800, 100, rooms.get(4)));
+				.add(new RoomGesture(0, 0, 800, 100, rooms.get(4), "down"));
 		rooms.get(3).gestures
-				.add(new RoomGesture(0, 0, 100, 480, rooms.get(1)));
+				.add(new RoomGesture(0, 0, 100, 480, rooms.get(1), "right"));
 
 		rooms.get(4).gestures
-				.add(new RoomGesture(0, 0, 400, 100, rooms.get(0)));
+				.add(new RoomGesture(0, 0, 400, 100, rooms.get(0), "down"));
 		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms
-				.get(1)));
+				.get(1), "down"));
 		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
-				.get(2)));
+				.get(2), "up"));
 
 		// Füge die Lichtsteuerung hinzu
 		rooms.get(0).gestures.add(new LightGesture(300, 140, 500, 340,

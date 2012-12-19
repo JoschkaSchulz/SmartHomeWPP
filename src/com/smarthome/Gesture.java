@@ -36,6 +36,9 @@ public abstract class Gesture {
 		else return false;
 		return true;
 	}
+	public boolean gesture(SmartHomeActivity activity, String gesture) {
+		return false;
+	}
 	public void click(SmartHomeActivity activity, boolean isLong) {
 		imitate(activity, this, isLong);
 	}
