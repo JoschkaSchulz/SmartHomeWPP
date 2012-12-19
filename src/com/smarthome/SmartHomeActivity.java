@@ -11,7 +11,9 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
@@ -35,6 +37,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	
 	public CameraController camera = new CameraController();
 	
+	public int initializationState = 0;
+	
 	public void prepareImage(int x1, int y1, int x2, int y2, ImageView image, int ix, int iy) {
 		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
 		x1 = (int)g.x1; y1 = (int)g.y1; x2 = (int)g.x2; y2 = (int)g.y2;
@@ -49,11 +53,22 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		image.setLayoutParams(lp);
 	}
 	
+	public void onDestroy() {
+		super.onDestroy();
+		
+		finish();
+		System.exit(0);
+	}
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-    	
-    	camera.activity = this;
+		super.onCreate(savedInstanceState);
+		
+		System.out.println(initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+		
+		if (initializationState == 127) return;
+		
+		camera.activity = this;
     	
     	Display display = getWindowManager().getDefaultDisplay();
     	Point size = new Point();
@@ -64,14 +79,16 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	System.out.println("--SCREEN--");
     	System.out.println("Width: "+screenWidth);
     	System.out.println("Height: "+screenHeight);
-    	
+    
     	setUpRooms();
     	
-    	mRenderer = new SmartHomeRenderer(this);
+		mRenderer = new SmartHomeRenderer(this);
     	mRenderer.setSurfaceView(mSurfaceView);
     	super.setRenderer(mRenderer);
     	mSurfaceView.setOnTouchListener(this);
     	mSurfaceView.setOnKeyListener(this);
+//    	mSurfaceView.setOnLongClickListener(this);
+//    	mSurfaceView.setOnClickListener(this);
     	
     	imagePane = new FrameLayout(this);
         FrameLayout frame = new FrameLayout(this);
@@ -96,12 +113,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         mLayout.addView(imagePane);
         
         debug.actionPerformed("enter", this);
+        initializationState |= 1;
     }
-    
-    @Override
-	protected void onStart() {
-		super.onStart();
-	}
 
 	@Override
     public boolean onKeyDown(int keycode, KeyEvent event ) {
@@ -120,20 +133,36 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
      return super.onKeyDown(keycode,event);  
     }
     
+	private long start;
+	int oldX;
+	int oldY;
+	int newX;
+	int newY;
+	boolean 
+	timer
+	up
+	
 	public boolean onTouch(View v, MotionEvent event) {
+		System.out.println("Event: "+event.toString());
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
+			start = System.currentTimeMillis();
+		}else if(event.getAction() == MotionEvent.ACTION_UP) {
+			
+			System.out.println("TIME CLICKED: "+(start-System.currentTimeMillis()));
+			
 			if (isDebug && mRenderer != null)
 				debug.fire(event.getX(), event.getY(), this);
 			else if (room != null)
 				room.fire(event.getX(), event.getY(), this);
 		}
-		if(event.getActionMasked() == MotionEvent.ACTION_MOVE) {
-			System.out.println("Moved!");
-		}
-		return super.onTouchEvent(event);
+		return true;
 	}
 
 	private void setUpRooms() {
+		System.out.println(initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+
+		if (initializationState == 127) return;
+
 		debug = new DebugController(10f, 10f, 99, this);
 		
 		rooms = new LinkedList<Room>();
@@ -179,9 +208,12 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		
 		room = rooms.get(0);
 		room.appear(this);
+		
+        initializationState |= 2;
 	}
 
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

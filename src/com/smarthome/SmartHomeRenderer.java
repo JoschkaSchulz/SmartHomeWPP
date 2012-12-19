@@ -21,10 +21,18 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	public SmartHomeRenderer(SmartHomeActivity context) {
 		super(context);
 		activity = context;
+
+		System.out.println(activity.initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+		
+		if (activity.initializationState == 127) return;
+
 		setFrameRate(50);
+		activity.initializationState |= 4;
 	}
 	
 	private void setAmbient() {
+		System.out.println(activity.initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+
 		l = new LightController();
 		l.light.setPosition(25.5f, -19f, -100.0f);
 		l.addRole("ambient");
@@ -59,9 +67,12 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		l.addRole("side");
 		l.publish();
 		
+		activity.initializationState |= 8;
 	}
 	
 	private void setUpLights() {
+		System.out.println(activity.initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+
 		l = new LightController();
 		l.light.setPosition(7f, -8f, -15.0f);
 		l.addRole("dining_light");
@@ -104,9 +115,12 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 			lc.light.setPower(50f);
 		}
 		
+		activity.initializationState |= 16;
 	}
 	
 	private void setUpLivingPlaceModel() {
+		System.out.println(activity.initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+
 		ObjParser objParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.livingplace_obj);
 		objParser.parse();
 		mLivingPlace = objParser.getParsedObject();
@@ -127,9 +141,15 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 //		mMaterial.setUseColor(true);
 //		mLivingPlace.setMaterial(mMaterial);
 //		mLivingPlace.setColor(0xff666666);
+
+		activity.initializationState |= 32;
 	}
 	
 	public void initScene() {
+		System.out.println(activity.initializationState + " at " + Thread.currentThread().getStackTrace()[2].getClassName() + "." + Thread.currentThread().getStackTrace()[2].getMethodName());
+
+		if (activity.initializationState == 127) return;
+
 		this.setAmbient();
 		
 		this.setUpLights();
@@ -139,6 +159,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 		mCamera.setZ(-35.0f);
 		activity.camera.logSource(true);
 		
+        activity.initializationState |= 64;
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -147,6 +168,7 @@ public class SmartHomeRenderer extends RajawaliRenderer {
 	
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
+		
 		if (activity.camera.ready()) activity.camera.setCamera();
 		/*if (activity.room != null)
 			this.getCamera().setPosition(activity.room.getX(), activity.room.getY(), -50.0f);*/
