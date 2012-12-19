@@ -115,6 +115,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
         mLayout.addView(imagePane);
         
         debug.actionPerformed("enter", this);
+
+        room.appear(this);
         initializationState |= 1;
     }
 
@@ -225,7 +227,6 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light"));
 		
 		room = rooms.get(0);
-		room.appear(this);
 		
         initializationState |= 2;
 	}
