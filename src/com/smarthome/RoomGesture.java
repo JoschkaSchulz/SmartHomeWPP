@@ -13,7 +13,7 @@ public class RoomGesture extends Gesture {
 		activity.room.disappear(activity);
 		activity.room = room;
 		activity.room.appear(activity);
-		Camera camera = room.camera;//new Camera();
+		//Camera camera = room.camera;//new Camera();
 		//camera = activity.camera.giveSource();
 		activity.camera.logSource(true);
 		activity.camera.setTarget(room.camera);

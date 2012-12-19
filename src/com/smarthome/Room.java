@@ -10,10 +10,10 @@ public class Room {
 	private int id;
 	public LinkedList<Gesture> gestures = new LinkedList<Gesture>();
 	
-	public Room(float x, float y, int id) {
+	public Room(float x, float y, int id, SmartHomeActivity activity) {
 		this.x = x;
 		this.y = y;
-		Camera camera = new Camera();
+		camera = new Camera();
 		camera.setPosition(x, y, z);
 		camera.setRotation(rotx, roty, rotz);
 		this.id = id;
