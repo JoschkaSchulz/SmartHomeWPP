@@ -19,7 +19,7 @@ public class SliderController extends Room implements ActionListener {
 		this.gestures.add(new DebugGesture(100, 350, 700, 380, "blue", this));
 		this.gestures.add(new DebugGesture(0, 0, 800, 480, "leave", this) {
 			public void appear(SmartHomeActivity activity) {
-				createSample(R.drawable.lamp, activity);
+				createSample(R.drawable.light, activity);
 				activity.imagePane.addView(images.get(0));
 			}
 			public void disappear(SmartHomeActivity activity) {
