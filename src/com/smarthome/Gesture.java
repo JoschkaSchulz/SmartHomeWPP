@@ -1,11 +1,15 @@
 package com.smarthome;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+
+import android.widget.ImageView;
 
 public abstract class Gesture {
 	public static HashSet<Gesture> gestures = new HashSet<Gesture>();
 	public float x1, y1, x2, y2;
 	public Gesture parent;
+	public LinkedList<ImageView> images = new LinkedList<ImageView>();
 	public static HashSet<Gesture> byParent(Gesture parent) {
 		HashSet<Gesture> result = new HashSet<Gesture>();
 		for (Gesture gesture : gestures)
@@ -23,23 +27,29 @@ public abstract class Gesture {
 	public boolean match(float x, float y) {
 		return x >= x1 && x <= x2 && y >= y1 && y <= y2;
 	}
-	public boolean fire(float x, float y, SmartHomeActivity activity) {
+	public boolean fire(float x, float y, SmartHomeActivity activity, boolean isLong) {
 		if (match(x, y)) {
-			click(activity);
+			click(activity, isLong);
 			System.out.println("Event " + toString() + " fired at [" + x + ", " + y + "]");
 		}
 		else return false;
 		return true;
 	}
-	public void click(SmartHomeActivity activity) {
-		imitate(activity, this);
+	public void click(SmartHomeActivity activity, boolean isLong) {
+		imitate(activity, this, isLong);
 	}
-	public void imitate(SmartHomeActivity activity, Gesture parent) {
+	public void imitate(SmartHomeActivity activity, Gesture parent, boolean isLong) {
 		for (Gesture gesture : byParent(this)) {
-			gesture.imitate(activity, parent);
+			gesture.imitate(activity, parent, isLong);
 		}
 	}
 	public String toString() {
 		return "Gesture: [" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + "]";
+	}
+	public void appear(SmartHomeActivity activity) {
+		
+	}
+	public void disappear(SmartHomeActivity activity) {
+		
 	}
 }

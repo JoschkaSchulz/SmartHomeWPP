@@ -9,9 +9,9 @@ public class DebugGesture extends Gesture {
 		this.action = action;
 		this.listener = listener;
 	}
-	public void click(SmartHomeActivity activity) {
+	public void click(SmartHomeActivity activity, boolean isLong) {
 		listener.actionPerformed(action, activity);
-		super.click(activity);
+		super.click(activity, isLong);
 	}
 	public String toString() {
 		return super.toString() + " fires event " + action;
