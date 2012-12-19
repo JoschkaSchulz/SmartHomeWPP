@@ -152,8 +152,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		Timer longClick = new Timer();
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			firedHandler = false;
-			oldX = event.getX();
-			oldY = event.getY();
+			newX = oldX = event.getX();
+			newY = oldY = event.getY();
 			longClick.schedule(new TimerTask() {
 				@Override
 				public void run() {
