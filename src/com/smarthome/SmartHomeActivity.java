@@ -220,11 +220,11 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms.get(2)));
 		
 		//Füge die Lichtsteuerung hinzu
-		rooms.get(0).gestures.add(new LightGesture(100,100,700,380, "dining_light"));
-		rooms.get(1).gestures.add(new LightGesture(100,100,700,380, "kitchen_main_light"));
-		rooms.get(2).gestures.add(new LightGesture(100,100,700,380, "sleeping_light"));
-		rooms.get(3).gestures.add(new LightGesture(100,100,700,380, "lounge_light"));
-		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light"));
+		rooms.get(0).gestures.add(new LightGesture(300,140,500,340, "dining_light"));
+		rooms.get(1).gestures.add(new LightGesture(300,140,500,340, "kitchen_main_light"));
+		rooms.get(2).gestures.add(new LightGesture(320,160,520,360, "sleeping_light"));
+		rooms.get(3).gestures.add(new LightGesture(320,160,520,360, "lounge_light"));
+		rooms.get(4).gestures.add(new LightGesture(300,180,500,380, "corridor_light"));
 		
 		room = rooms.get(0);
 		
