@@ -51,7 +51,7 @@ public abstract class Gesture {
 		if (images.size() == 0) {
 	        ImageView image = new ImageView(activity);
 	        image.setImageResource(R.drawable.lamp);
-	        activity.prepareImage((int)x1, (int)y1, (int)x2, (int)y2, image, 128, 128);
+	        activity.prepareImageScaled((int)x1, (int)y1, (int)x2, (int)y2, image, 128, 128);
 	        image.setScaleType(ScaleType.FIT_XY);
 	        images.add(image); 
 		}
