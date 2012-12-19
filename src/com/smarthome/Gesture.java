@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 public abstract class Gesture {
 	public static HashSet<Gesture> gestures = new HashSet<Gesture>();
@@ -45,6 +46,15 @@ public abstract class Gesture {
 	}
 	public String toString() {
 		return "Gesture: [" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + "]";
+	}
+	public void createSample(int resource, SmartHomeActivity activity) {
+		if (images.size() == 0) {
+	        ImageView image = new ImageView(activity);
+	        image.setImageResource(R.drawable.lamp);
+	        activity.prepareImage((int)x1, (int)y1, (int)x2, (int)y2, image, 128, 128);
+	        image.setScaleType(ScaleType.FIT_XY);
+	        images.add(image); 
+		}
 	}
 	public void appear(SmartHomeActivity activity) {
 		

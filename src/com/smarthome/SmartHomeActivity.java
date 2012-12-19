@@ -13,9 +13,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
@@ -28,7 +26,9 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	public Room room;
 	public LinkedList<Room> rooms;
 	
+	public boolean isSlider = false;
 	public boolean isDebug = false;
+	public SliderController slider;
 	public DebugController debug;
 	public static int screenWidth;
 	public static int screenHeight;
@@ -173,6 +173,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 			
 			if (isDebug && mRenderer != null)
 				debug.fire(newX, newY, this, isLong);
+			else if (isSlider && mRenderer != null)
+				slider.fire(newX, newY, this, isLong);
 			else if (room != null)
 				room.fire(newX, newY, this, isLong);
 		}
@@ -184,6 +186,8 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		if (initializationState == 127) return;
 
 		debug = new DebugController(10f, 10f, 99, this);
+		
+		slider = new SliderController(10f, 10f, 99, this);
 		
 		rooms = new LinkedList<Room>();
 		

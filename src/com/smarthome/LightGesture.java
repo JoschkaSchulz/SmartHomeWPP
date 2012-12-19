@@ -15,9 +15,18 @@ public class LightGesture extends Gesture {
 		this.action = action;
 	}
 	public void click(SmartHomeActivity activity, boolean isLong) {
-		System.out.println("Light "+(on ? "on" : "off"));
-		on = !on;
-		
+		if (isLong) {
+			activity.slider.lightGesture = this;
+			activity.slider.actionPerformed("enter", activity);
+		} else {
+			System.out.println("Light "+(on ? "on" : "off"));
+			setLight(!on);
+			super.click(activity, isLong);
+		}
+	}
+	public void setLight(boolean on) {
+		this.on = on;
+
 		for (LightController lc : LightController.byRole(action)) {
 			lc.light.setPower(on ? 5f : 0f);
 		}
@@ -28,21 +37,14 @@ public class LightGesture extends Gesture {
 			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
-			on = !on;
+			this.on = !on;
 		}
-		super.click(activity, isLong);
 	}
 	public String toString() {
 		return super.toString() + " to light " + action + " (currently " + (on ? "on" : "off") + ")";
 	}
 	public void appear(SmartHomeActivity activity) {
-		if (images.size() == 0) {
-	        ImageView image = new ImageView(activity);
-	        image.setImageResource(R.drawable.lamp);
-	        activity.prepareImage((int)x1, (int)y1, (int)x2, (int)y2, image, 128, 128);
-	        image.setScaleType(ScaleType.FIT_XY);
-	        images.add(image); 
-		}
+		createSample(R.drawable.lamp, activity);
 		activity.imagePane.addView(images.get(0));
 	}
 	public void disappear(SmartHomeActivity activity) {
