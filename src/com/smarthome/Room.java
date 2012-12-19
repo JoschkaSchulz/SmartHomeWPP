@@ -27,6 +27,7 @@ public class Room {
 	}
 	
 	public boolean gesture(SmartHomeActivity activity, String gestureStr) {
+		System.out.println("Gesture: " + gestureStr + "!");
 		for (Gesture gesture: gestures)
 			if (gesture.gesture(activity, gestureStr)) return true;
 		return false;

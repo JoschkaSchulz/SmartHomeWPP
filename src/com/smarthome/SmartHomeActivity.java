@@ -191,12 +191,12 @@ public class SmartHomeActivity extends RajawaliActivity implements
 			if (Math.max(distX, distY) > screenWidth / 8) {
 				String gestureStr = "";
 				if (distX > distY) {
-					if (distX > 0)
+					if (newX > oldX)
 						gestureStr = "right";
 					else
 						gestureStr = "left";
 				} else {
-					if (distY > 0)
+					if (newY > oldY)
 						gestureStr = "down";
 					else
 						gestureStr = "up";
@@ -207,7 +207,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 					;
 				else if (room != null)
 					room.gesture(this, gestureStr);
-
+				return;
 			}
 			
 			if (isDebug && mRenderer != null)
