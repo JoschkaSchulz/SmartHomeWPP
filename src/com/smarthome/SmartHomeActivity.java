@@ -60,8 +60,9 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void onDestroy() {
 		super.onDestroy();
 
-		finish();
-		System.exit(0);
+		android.os.Process.killProcess(android.os.Process.myPid());
+//		finish();
+//		System.exit(0);
 	}
 
 	@Override
@@ -266,7 +267,6 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	}
 
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }
