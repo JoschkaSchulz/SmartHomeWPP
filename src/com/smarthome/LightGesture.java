@@ -1,5 +1,8 @@
 package com.smarthome;
 
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+
 
 public class LightGesture extends Gesture {
 	private boolean on = false;
@@ -11,7 +14,7 @@ public class LightGesture extends Gesture {
 		super(x1, y1, x2, y2);
 		this.action = action;
 	}
-	public void click(SmartHomeActivity activity) {
+	public void click(SmartHomeActivity activity, boolean isLong) {
 		System.out.println("Light "+(on ? "on" : "off"));
 		on = !on;
 		
@@ -27,9 +30,21 @@ public class LightGesture extends Gesture {
 			System.out.println("Senden Fehlgeschlagen");
 			on = !on;
 		}
-		super.click(activity);
+		super.click(activity, isLong);
 	}
 	public String toString() {
 		return super.toString() + " to light " + action + " (currently " + (on ? "on" : "off") + ")";
+	}
+	public void appear(SmartHomeActivity activity) {
+		if (images.size() == 0) {
+	        ImageView image = new ImageView(activity);
+	        image.setImageResource(R.drawable.lamp);
+	        activity.prepareImage((int)x1, (int)y1, (int)x2, (int)y2, image, 128, 128);
+	        image.setScaleType(ScaleType.FIT_XY);
+		}
+		activity.imagePane.addView(images.get(0));
+	}
+	public void disappear(SmartHomeActivity activity) {
+		activity.imagePane.removeView(images.get(0));
 	}
 }

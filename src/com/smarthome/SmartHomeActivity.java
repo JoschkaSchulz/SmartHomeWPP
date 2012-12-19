@@ -31,6 +31,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 	public SmartHomeRenderer mRenderer;
 	public TextView label;
 	public ImageView image;
+	public FrameLayout imagePane;
 	
 	public CameraController camera = new CameraController();
 	
@@ -72,7 +73,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
     	mSurfaceView.setOnTouchListener(this);
     	mSurfaceView.setOnKeyListener(this);
     	
-    	FrameLayout imagePane = new FrameLayout(this);
+    	imagePane = new FrameLayout(this);
         FrameLayout frame = new FrameLayout(this);
         
         label = new TextView(this);
@@ -177,6 +178,7 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		rooms.get(4).gestures.add(new LightGesture(100,100,700,380, "corridor_light"));
 		
 		room = rooms.get(0);
+		room.appear(this);
 	}
 
 	public boolean onKey(View v, int keyCode, KeyEvent event) {

@@ -2,20 +2,26 @@ package com.smarthome;
 
 import java.util.LinkedList;
 
+import rajawali.Camera;
+
 public class Room {
-	private float x, y;
+	public float x, y, z = -35, rotx = 0, roty = 0, rotz = 0;
+	public Camera camera;
 	private int id;
 	public LinkedList<Gesture> gestures = new LinkedList<Gesture>();
 	
 	public Room(float x, float y, int id) {
 		this.x = x;
 		this.y = y;
+		Camera camera = new Camera();
+		camera.setPosition(x, y, z);
+		camera.setRotation(rotx, roty, rotz);
 		this.id = id;
 	}
 	
-	public boolean fire(float x, float y, SmartHomeActivity activity) {
+	public boolean fire(float x, float y, SmartHomeActivity activity, boolean isLong) {
 		for (Gesture gesture: gestures)
-			if (gesture.fire(x, y, activity)) return true;
+			if (gesture.fire(x, y, activity, isLong)) return true;
 		return false;
 	}
 	
@@ -23,11 +29,12 @@ public class Room {
 		return this.id;
 	}
 	
-	public float getX() {
-		return x;
+	public void appear(SmartHomeActivity activity) {
+		for (Gesture gesture: gestures)
+			gesture.appear(activity);
 	}
-	
-	public float getY() {
-		return y;
+	public void disappear(SmartHomeActivity activity) {
+		for (Gesture gesture: gestures)
+			gesture.disappear(activity);
 	}
 }
