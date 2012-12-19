@@ -190,19 +190,19 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
 		//Füge Räume hinzu
 		
 		//Raum: Esszimmer
-		rooms.add(new Room(7f, -8f, 0));
+		rooms.add(new Room(7f, -8f, 0, this));
 		
 		//Raum: Küche
-		rooms.add(new Room(25.5f, -8f, 1));
+		rooms.add(new Room(25.5f, -8f, 1, this));
 		
 		//Raum: Schlafzimmer
-		rooms.add(new Room(12.0f, -30.5f, 2));
+		rooms.add(new Room(12.0f, -30.5f, 2, this));
 		
 		//Raum: Wohnzimmer
-		rooms.add(new Room(41.5f, -8f, 3));
+		rooms.add(new Room(41.5f, -8f, 3, this));
 		
 		//Raum: Flur
-		rooms.add(new Room(17.5f, -19f, 4));
+		rooms.add(new Room(17.5f, -19f, 4, this));
 		
 		//Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms.get(1)));	//Esszimmer -> Küche

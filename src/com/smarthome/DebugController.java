@@ -7,7 +7,7 @@ public class DebugController extends Room implements ActionListener {
 	int mode = 0;
 	int element = 0;
 	public DebugController(float x, float y, int id, SmartHomeActivity activity) {
-		super(x, y, id);
+		super(x, y, id, activity);
 		this.activity = activity;
 		//this.gestures.add(new DebugGesture(0, 0, 800, 480, "debug", this));
 		this.gestures.add(new DebugGesture(0, 0, 200, 80, "mode", this));
