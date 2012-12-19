@@ -135,46 +135,45 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
      return super.onKeyDown(keycode,event);  
     }
     
-	private int oldX, oldY;
-	private int newX, newY;
+	private float oldX, oldY;
+	private float newX, newY;
 	private boolean firedHandler;
 	private Timer longClick;
 	
 	public boolean onTouch(View v, final MotionEvent event) {
+		Timer longClick = new Timer();
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
 			firedHandler = false;
+			oldX = event.getX();
+			oldY = event.getY();
 			longClick.schedule(new TimerTask() {		
 				@Override
 				public void run() {
-					SmartHomeActivity.this.longClick();
+					SmartHomeActivity.this.click(true);
 				}
 			}, 400);
 		}else if(event.getAction() == MotionEvent.ACTION_UP) {
+			newX = event.getX();
+			newY = event.getY();
 			longClick.cancel();
-			click(event);
+			click(false);
+		}else if(event.getAction() == MotionEvent.ACTION_MOVE) {
+			newX = event.getX();
+			newY = event.getY();
 		}
 		return true;
 	}
 	
-	public void click(MotionEvent event) {
+	public void click(boolean isLong) {
 		if(!firedHandler) {
 			firedHandler = true;
-			System.out.println("~~~Click~~~");
+			System.out.println("~~~"+((isLong)?"Long ":"")+"Click~~~");
 			
 			if (isDebug && mRenderer != null)
-				debug.fire(event.getX(), event.getY(), this);
+				debug.fire(newX, newY, this, isLong);
 			else if (room != null)
-				room.fire(event.getX(), event.getY(), this);
+				room.fire(newX, newY, this, isLong);
 		}
-		
-	}
-	
-	public void longClick() {
-		if(!firedHandler) {
-			firedHandler = true;
-			System.out.println("~~~Long Click~~~");
-		}
-		
 	}
 
 	private void setUpRooms() {
