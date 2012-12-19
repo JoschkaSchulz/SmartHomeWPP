@@ -1,6 +1,8 @@
 package com.smarthome;
 
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import rajawali.RajawaliActivity;
 import android.graphics.Color;
@@ -132,29 +134,46 @@ public class SmartHomeActivity extends RajawaliActivity implements OnTouchListen
      return super.onKeyDown(keycode,event);  
     }
     
-	private long start;
-	int oldX;
-	int oldY;
-	int newX;
-	int newY;
-	boolean 
-	timer
-	up
+	private int oldX, oldY;
+	private int newX, newY;
+	private boolean firedHandler;
+	private Timer longClick;
 	
-	public boolean onTouch(View v, MotionEvent event) {
-		System.out.println("Event: "+event.toString());
+	public boolean onTouch(View v, final MotionEvent event) {
 		if( event.getAction() == MotionEvent.ACTION_DOWN) {
-			start = System.currentTimeMillis();
+			firedHandler = false;
+			longClick.schedule(new TimerTask() {		
+				@Override
+				public void run() {
+					SmartHomeActivity.this.longClick();
+				}
+			}, 400);
 		}else if(event.getAction() == MotionEvent.ACTION_UP) {
-			
-			System.out.println("TIME CLICKED: "+(start-System.currentTimeMillis()));
+			longClick.cancel();
+			click(event);
+		}
+		return true;
+	}
+	
+	public void click(MotionEvent event) {
+		if(!firedHandler) {
+			firedHandler = true;
+			System.out.println("~~~Click~~~");
 			
 			if (isDebug && mRenderer != null)
 				debug.fire(event.getX(), event.getY(), this);
 			else if (room != null)
 				room.fire(event.getX(), event.getY(), this);
 		}
-		return true;
+		
+	}
+	
+	public void longClick() {
+		if(!firedHandler) {
+			firedHandler = true;
+			System.out.println("~~~Long Click~~~");
+		}
+		
 	}
 
 	private void setUpRooms() {
