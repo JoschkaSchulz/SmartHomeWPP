@@ -46,13 +46,17 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void prepareImage(int x1, int y1, int x2, int y2, ImageView image,
 			int ix, int iy) {
 		DebugGesture g = new DebugGesture(x1, y1, x2, y2, "", debug);
-		x1 = (int)g.x1; y1 = (int)g.y1; x2 = (int)g.x2; y2 = (int)g.y2;
+		x1 = (int) g.x1;
+		y1 = (int) g.y1;
+		x2 = (int) g.x2;
+		y2 = (int) g.y2;
 		LayoutParams lp = new LayoutParams(x2 - x1, y2 - y1);
 		lp.setMargins(x1, y1, 0, 0);
 		image.setLayoutParams(lp);
 	}
-	
-	public void prepareImageScaled(int x1, int y1, int x2, int y2, ImageView image, int ix, int iy) {
+
+	public void prepareImageScaled(int x1, int y1, int x2, int y2,
+			ImageView image, int ix, int iy) {
 		LayoutParams lp = new LayoutParams(x2 - x1, y2 - y1);
 		lp.setMargins(x1, y1, 0, 0);
 		image.setLayoutParams(lp);
@@ -61,12 +65,12 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void onDestroy() {
 		super.onDestroy();
 
-		//New try for closing it complete
+		// New try for closing it complete
 		android.os.Process.killProcess(android.os.Process.myPid());
-		
-		//Works on smartphone well, doesn'T work on galaxy tab 2 Oo
-//		finish();
-//		System.exit(0);
+
+		// Works on smartphone well, doesn'T work on galaxy tab 2 Oo
+		// finish();
+		// System.exit(0);
 	}
 
 	@Override
@@ -185,7 +189,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void click(boolean isLong) {
 		if (!firedHandler) {
 			firedHandler = true;
-			System.out.println("~~~" + ((isLong) ? "Long " : "") + "Click["+newX+"/"+newY+"]~~~");
+			System.out.println("~~~" + ((isLong) ? "Long " : "") + "Click["
+					+ newX + "/" + newY + "]~~~");
 
 			float distX = Math.abs(newX - oldX);
 			float distY = Math.abs(newY - oldY);
@@ -210,7 +215,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 					room.gesture(this, gestureStr);
 				return;
 			}
-			
+
 			if (isDebug && mRenderer != null)
 				debug.fire(newX, newY, this, isLong);
 			else if (isSlider && mRenderer != null)
@@ -252,30 +257,65 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		// Raum: Flur
 		rooms.add(new Room(17.5f, -19f, 4, this));
 
+		// Esszimmer Fenster
+		rooms.add(new Room(10f, -11f, -16f, -75f, 0f, 0f, 5, this));
+
+		// Küche Fenster
+		rooms.add(new Room(26.5f, -11f, -16f, -75f, 0f, 0f, 6, this));
+
+		// Wohnzimmer Fenster
+		rooms.add(new Room(36.5f, -5f, -16f, 85f, -55f, -170f, 7, this));
+
+		// Wohnzimmer Fenster
+		rooms.add(new Room(15f, -29f, -16f, 75f, 0f, -180f, 8, this));
+
 		// Füge die Raumwechsel hinzu
 		rooms.get(0).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
 				.get(1), "left")); // Esszimmer -> Küche
 		rooms.get(0).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
 				.get(4), "up")); // Esszimmer -> Flur
+		rooms.get(0).gestures.add(new RoomGesture(270, 0, 600, 100, rooms
+				.get(5), "down"));
 
-		rooms.get(1).gestures
-				.add(new RoomGesture(0, 0, 100, 480, rooms.get(0), "right")); // Küche ->
-																		// Esszimmer
+		rooms.get(1).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(0),
+				"right")); // Küche ->
+		// Esszimmer
 		rooms.get(1).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
 				.get(4), "up")); // Küche -> Flur
 		rooms.get(1).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
 				.get(3), "left")); // Küche -> Wohnzimmer
+		rooms.get(1).gestures.add(new RoomGesture(270, 0, 600, 100, rooms
+				.get(6), "down"));
 
-		rooms.get(2).gestures
-				.add(new RoomGesture(0, 0, 800, 100, rooms.get(4), "down"));
-		rooms.get(3).gestures
-				.add(new RoomGesture(0, 0, 100, 480, rooms.get(1), "right"));
+		rooms.get(2).gestures.add(new RoomGesture(0, 0, 800, 100, rooms.get(4),
+				"down"));
+		rooms.get(2).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
+				.get(8), "up"));
 
-		rooms.get(4).gestures
-				.add(new RoomGesture(0, 0, 400, 100, rooms.get(0), "down"));
+		rooms.get(3).gestures.add(new RoomGesture(0, 0, 100, 480, rooms.get(1),
+				"right"));
+		rooms.get(3).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
+				.get(7), "left"));
+
+		rooms.get(4).gestures.add(new RoomGesture(0, 0, 400, 100, rooms.get(0),
+				"right"));
 		rooms.get(4).gestures.add(new RoomGesture(401, 0, 800, 100, rooms
 				.get(1), "down"));
 		rooms.get(4).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
+				.get(2), "up"));
+		rooms.get(4).gestures.add(new RoomGesture(700, 0, 800, 480, rooms
+				.get(3), "left"));
+
+		rooms.get(5).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
+				.get(0), "up"));
+
+		rooms.get(6).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
+				.get(1), "up"));
+
+		rooms.get(7).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
+				.get(3), "up"));
+
+		rooms.get(8).gestures.add(new RoomGesture(0, 380, 800, 480, rooms
 				.get(2), "up"));
 
 		// Füge die Lichtsteuerung hinzu
@@ -292,9 +332,9 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		rooms.get(4).gestures.add(new LightGesture(300, 180, 500, 380, lu));
 
 		room = rooms.get(0);
-		
+
 		lightGroup = new Gesture();
-		
+
 		for (Room room : rooms) {
 			for (Gesture gesture : room.gestures) {
 				if (gesture instanceof LightGesture) {
@@ -302,12 +342,15 @@ public class SmartHomeActivity extends RajawaliActivity implements
 				}
 			}
 		}
-				
+
 		CurtainUnit cu;
 		cu = new CurtainUnit("blinds_dining_kitchen");
-		rooms.get(1).gestures.add(new CurtainGesture(470, 10, 570, 110, cu));
-		rooms.get(1).gestures.add(new CurtainGesture(170, 10, 270, 110, cu));
-		
+		rooms.get(5).gestures.add(new CurtainGesture(100, 10, 200, 210, cu));
+		rooms.get(5).gestures.add(new CurtainGesture(515, 10, 715, 210, cu));
+
+		rooms.get(6).gestures.add(new CurtainGesture(470, 10, 570, 110, cu));
+		rooms.get(6).gestures.add(new CurtainGesture(250, 10, 350, 110, cu));
+
 		cu = new CurtainUnit("blinds_sleeping");
 		rooms.get(2).gestures.add(new CurtainGesture(410, 400, 510, 500, cu));
 

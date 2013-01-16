@@ -20,6 +20,19 @@ public class Room {
 		this.id = id;
 	}
 	
+	public Room(float x, float y, float z, float rotx, float roty, float rotz, int id, SmartHomeActivity activity) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.rotx = rotx;
+		this.roty = roty;
+		this.rotz = rotz;
+		camera = new Camera();
+		camera.setPosition(x, y, z);
+		camera.setRotation(rotx, roty, rotz);
+		this.id = id;
+	}
+	
 	public boolean fire(float x, float y, SmartHomeActivity activity, boolean isLong) {
 		for (Gesture gesture: gestures)
 			if (gesture.fire(x, y, activity, isLong)) return true;
