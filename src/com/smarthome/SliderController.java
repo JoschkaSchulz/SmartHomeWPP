@@ -4,7 +4,7 @@ import android.view.View;
 
 public class SliderController extends Room implements ActionListener {
 	SmartHomeActivity activity;
-	LightGesture lightGesture;
+	LightUnit lightUnit;
 	float minx, maxx;
 	int accessMode = 0; // 0 = current, 2 = all
 	public SliderController(float x, float y, int id, SmartHomeActivity activity) {
@@ -61,9 +61,9 @@ public class SliderController extends Room implements ActionListener {
 			activity.room.disappear(activity);
 			accessMode = 0;
 			appear(activity);
-			moveSlider(0, lightGesture.red, gestures.get(5), activity);
-			moveSlider(1, lightGesture.green, gestures.get(6), activity);
-			moveSlider(2, lightGesture.blue, gestures.get(7), activity);
+			moveSlider(0, lightUnit.red, gestures.get(5), activity);
+			moveSlider(1, lightUnit.green, gestures.get(6), activity);
+			moveSlider(2, lightUnit.blue, gestures.get(7), activity);
 			activity.isSlider = true;
 		}
 		if (action.equals("leave")) {
@@ -78,7 +78,7 @@ public class SliderController extends Room implements ActionListener {
 			return;
 			*/
 		}
-		LightGesture lightGesture = this.lightGesture;
+		LightUnit lightUnit = this.lightUnit;
 		if (accessMode == 2) {
 		}
 		if (action.equals("target")) {
@@ -90,19 +90,19 @@ public class SliderController extends Room implements ActionListener {
 		if (action.equals("all")) {
 			accessMode = 2;
 		}
-		if (lightGesture == null) return;
+		if (lightUnit == null) return;
 		if (action.equals("on")) {
 			if (accessMode == 2) {
 				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{1});
 			} else {
-				lightGesture.setLight(true);
+				lightUnit.setLight(true);
 			}
 		}
 		if (action.equals("off")) {
 			if (accessMode == 2) {
 				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{0});
 			} else {
-				lightGesture.setLight(false);
+				lightUnit.setLight(false);
 			}
 		}
 	}
@@ -117,29 +117,29 @@ public class SliderController extends Room implements ActionListener {
 		slider.moveSample(activity, minx + (color * (maxx - minx) / 255) - 25, height - 10, minx + (color * (maxx - minx) / 255) + 25, height + 40);
 	}
 	public void actionPerformed(String action, SmartHomeActivity activity, float x, float y) {
-		if (lightGesture == null) return;
+		if (lightUnit == null) return;
 		boolean colorSet = false;
 		if (action.equals("red")) {
-			lightGesture.red = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.red = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
-			moveSlider(0, lightGesture.red, gestures.get(5), activity);
+			moveSlider(0, lightUnit.red, gestures.get(5), activity);
 		}
 		if (action.equals("green")) {
-			lightGesture.green = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.green = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
-			moveSlider(1, lightGesture.green, gestures.get(6), activity);
+			moveSlider(1, lightUnit.green, gestures.get(6), activity);
 		}
 		if (action.equals("blue")) {
-			lightGesture.blue = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.blue = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
-			moveSlider(2, lightGesture.blue, gestures.get(7), activity);
+			moveSlider(2, lightUnit.blue, gestures.get(7), activity);
 		}
 		if (colorSet) {
 			if (accessMode == 2) {
-				activity.lightGroup.imitate(activity, activity.lightGroup, "setColor", new int[]{lightGesture.red, lightGesture.green, lightGesture.blue});
+				activity.lightGroup.imitate(activity, activity.lightGroup, "setColor", new int[]{lightUnit.red, lightUnit.green, lightUnit.blue});
 				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{1});
 			} else {
-				lightGesture.setLight(true);
+				lightUnit.setLight(true);
 			}
 		}
 		actionPerformed(action, activity);
