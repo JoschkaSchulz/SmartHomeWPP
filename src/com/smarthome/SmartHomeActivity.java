@@ -152,6 +152,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public float newX, newY;
 	private boolean firedHandler;
 	private Timer longClick;
+	public Gesture lightGroup;
 
 	public boolean onTouch(View v, final MotionEvent event) {
 		Timer longClick = new Timer();
@@ -184,7 +185,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void click(boolean isLong) {
 		if (!firedHandler) {
 			firedHandler = true;
-			System.out.println("~~~" + ((isLong) ? "Long " : "") + "Click~~~");
+			System.out.println("~~~" + ((isLong) ? "Long " : "") + "Click["+newX+"/"+newY+"]~~~");
 
 			float distX = Math.abs(newX - oldX);
 			float distY = Math.abs(newY - oldY);
@@ -290,6 +291,22 @@ public class SmartHomeActivity extends RajawaliActivity implements
 				"corridor_light"));
 
 		room = rooms.get(0);
+		
+		lightGroup = new Gesture();
+		
+		for (Room room : rooms) {
+			for (Gesture gesture : room.gestures) {
+				if (gesture instanceof LightGesture) {
+					gesture.parent = lightGroup;
+				}
+			}
+		}
+				
+		rooms.get(1).gestures.add(new CurtainGesture(370, 10, 470, 110, "blinds_dining_kitchen"));
+		
+		rooms.get(2).gestures.add(new CurtainGesture(410, 400, 510, 500, "blinds_sleeping"));
+
+		rooms.get(3).gestures.add(new CurtainGesture(700, 210, 800, 310, "blinds_lounge"));
 
 		initializationState |= 2;
 	}

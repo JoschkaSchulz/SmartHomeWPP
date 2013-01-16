@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-public abstract class Gesture {
+public class Gesture {
 	public static HashSet<Gesture> gestures = new HashSet<Gesture>();
 	public float x1, y1, x2, y2;
 	public Gesture parent;
@@ -45,6 +45,11 @@ public abstract class Gesture {
 	public void imitate(SmartHomeActivity activity, Gesture parent, boolean isLong) {
 		for (Gesture gesture : byParent(this)) {
 			gesture.imitate(activity, parent, isLong);
+		}
+	}
+	public void imitate(SmartHomeActivity activity, Gesture parent, String action, int[] parameters) {
+		for (Gesture gesture : byParent(this)) {
+			gesture.imitate(activity, parent, action, parameters);
 		}
 	}
 	public String toString() {

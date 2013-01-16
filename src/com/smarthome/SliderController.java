@@ -6,6 +6,7 @@ public class SliderController extends Room implements ActionListener {
 	SmartHomeActivity activity;
 	LightGesture lightGesture;
 	float minx, maxx;
+	int accessMode = 0; // 0 = current, 2 = all
 	public SliderController(float x, float y, int id, SmartHomeActivity activity) {
 		super(x, y, id, activity);
 		this.activity = activity;
@@ -58,6 +59,7 @@ public class SliderController extends Room implements ActionListener {
 	public void actionPerformed(String action, SmartHomeActivity activity) {
 		if (action.equals("enter")) {
 			activity.room.disappear(activity);
+			accessMode = 0;
 			appear(activity);
 			moveSlider(0, lightGesture.red, gestures.get(5), activity);
 			moveSlider(1, lightGesture.green, gestures.get(6), activity);
@@ -76,12 +78,32 @@ public class SliderController extends Room implements ActionListener {
 			return;
 			*/
 		}
+		LightGesture lightGesture = this.lightGesture;
+		if (accessMode == 2) {
+		}
+		if (action.equals("target")) {
+			accessMode = 0;
+		}
+		if (action.equals("room")) {
+			accessMode = 1;
+		}
+		if (action.equals("all")) {
+			accessMode = 2;
+		}
 		if (lightGesture == null) return;
 		if (action.equals("on")) {
-			lightGesture.setLight(true);
+			if (accessMode == 2) {
+				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{1});
+			} else {
+				lightGesture.setLight(true);
+			}
 		}
 		if (action.equals("off")) {
-			lightGesture.setLight(false);
+			if (accessMode == 2) {
+				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{0});
+			} else {
+				lightGesture.setLight(false);
+			}
 		}
 	}
 	public void moveSlider(int whichColor, int color, Gesture slider, SmartHomeActivity activity) {
@@ -113,7 +135,12 @@ public class SliderController extends Room implements ActionListener {
 			moveSlider(2, lightGesture.blue, gestures.get(7), activity);
 		}
 		if (colorSet) {
-			lightGesture.setLight(true);
+			if (accessMode == 2) {
+				activity.lightGroup.imitate(activity, activity.lightGroup, "setColor", new int[]{lightGesture.red, lightGesture.green, lightGesture.blue});
+				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{1});
+			} else {
+				lightGesture.setLight(true);
+			}
 		}
 		actionPerformed(action, activity);
 	}

@@ -40,6 +40,14 @@ public class LightGesture extends Gesture {
 			this.on = !on;
 		}
 	}
+	public void imitate(SmartHomeActivity activity, Gesture parent, String action, int[] parameters) {
+		if (action.equals("setLight")) {
+			setLight(parameters[0] != 0 ? true : false);
+		}
+		if (action.equals("setColor")) {
+			setColor(parameters[0], parameters[1], parameters[2]);
+		}
+	}
 	public void setColor(int red, int green, int blue) {
 		this.red = red;
 		this.green = green;
