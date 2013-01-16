@@ -65,6 +65,9 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public void onDestroy() {
 		super.onDestroy();
 
+		//Clear the cache
+		
+		
 		// New try for closing it complete
 		android.os.Process.killProcess(android.os.Process.myPid());
 
@@ -345,17 +348,17 @@ public class SmartHomeActivity extends RajawaliActivity implements
 
 		CurtainUnit cu;
 		cu = new CurtainUnit("blinds_dining_kitchen");
-		rooms.get(5).gestures.add(new CurtainGesture(100, 10, 200, 210, cu));
+		rooms.get(5).gestures.add(new CurtainGesture(100, 10, 300, 210, cu));
 		rooms.get(5).gestures.add(new CurtainGesture(515, 10, 715, 210, cu));
 
-		rooms.get(6).gestures.add(new CurtainGesture(470, 10, 570, 110, cu));
-		rooms.get(6).gestures.add(new CurtainGesture(250, 10, 350, 110, cu));
+		rooms.get(6).gestures.add(new CurtainGesture(70, 10, 270, 210, cu));
+		rooms.get(6).gestures.add(new CurtainGesture(465, 10, 665, 210, cu));
 
 		cu = new CurtainUnit("blinds_sleeping");
-		rooms.get(2).gestures.add(new CurtainGesture(410, 400, 510, 500, cu));
+		rooms.get(7).gestures.add(new CurtainGesture(410, 400, 510, 500, cu));
 
 		cu = new CurtainUnit("blinds_lounge");
-		rooms.get(3).gestures.add(new CurtainGesture(700, 210, 800, 310, cu));
+		rooms.get(8).gestures.add(new CurtainGesture(700, 210, 800, 310, cu));
 
 		initializationState |= 2;
 	}

@@ -25,6 +25,8 @@ public class CurtainGesture extends Gesture {
 	}
 	public void appear(SmartHomeActivity activity) {
 		createSample(R.drawable.curtain, activity);
+		//moveSample(activity, (x1 * 3 + x2) / 4f, y1, (x1 + x2 * 3) / 4f, y2);
+		//moveSample(activity, x1, y1, x2, y2);
 		activity.imagePane.addView(images.get(0));
 	}
 	public void disappear(SmartHomeActivity activity) {
