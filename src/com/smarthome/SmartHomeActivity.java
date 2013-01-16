@@ -305,7 +305,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 				
 		CurtainUnit cu;
 		cu = new CurtainUnit("blinds_dining_kitchen");
-		rooms.get(1).gestures.add(new CurtainGesture(370, 10, 470, 110, cu));
+		rooms.get(1).gestures.add(new CurtainGesture(470, 10, 570, 110, cu));
+		rooms.get(1).gestures.add(new CurtainGesture(170, 10, 270, 110, cu));
 		
 		cu = new CurtainUnit("blinds_sleeping");
 		rooms.get(2).gestures.add(new CurtainGesture(410, 400, 510, 500, cu));
