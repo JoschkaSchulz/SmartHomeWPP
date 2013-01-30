@@ -43,7 +43,7 @@ public class LightUnit {
 			} else {
 				send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
 			}
-			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
+			//send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
 //			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
