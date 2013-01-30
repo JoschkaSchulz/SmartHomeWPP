@@ -348,6 +348,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 			}
 		}
 
+		//Curtains
+		
 		CurtainUnit cu;
 		cu = new CurtainUnit("blinds_dining_kitchen");
 		rooms.get(5).gestures.add(new CurtainGesture(100, 10, 300, 210, cu));
@@ -362,6 +364,15 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		cu = new CurtainUnit("blinds"); //Schlafzimmer spinnt ein wenig... nicht blinds_sleeping verwenden -.-
 		rooms.get(8).gestures.add(new CurtainGesture(700, 210, 800, 310, cu));
 
+		//Windows
+		
+		WindowUnit wu;
+		wu = new WindowUnit("winDining0");
+		rooms.get(5).gestures.add(new WindowGesture(100, 210, 300, 410, wu));
+		wu = new WindowUnit("winDining1");
+		rooms.get(5).gestures.add(new WindowGesture(515, 210, 715, 410, wu));
+		
+		
 		initializationState |= 2;
 	}
 
