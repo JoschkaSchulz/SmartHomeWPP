@@ -332,17 +332,27 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		LightUnit lu;
 		lu = new LightUnit("dining_light");
 		rooms.get(0).gestures.add(new LightGesture(300, 140, 500, 340, lu));
+		lu = new LightUnit("dining_light",true);
+		rooms.get(0).gestures.add(new LightGesture(500, 140, 700, 340, lu));
 		lu = new LightUnit("kitchen_main_light");
-		rooms.get(1).gestures.add(new LightGesture(300, 140, 500, 340, lu));
+		rooms.get(1).gestures.add(new LightGesture(300, 100, 440, 240, lu));
+		lu = new LightUnit("kitchen_cooking_light");
+		rooms.get(1).gestures.add(new LightGesture(500, 100, 640, 240, lu));
+		lu = new LightUnit("kitchen_main_light",true);
+		rooms.get(1).gestures.add(new LightGesture(300, 240, 440, 380, lu));
+		lu = new LightUnit("kitchen_cooking_light",true);
+		rooms.get(1).gestures.add(new LightGesture(500, 240, 640, 380, lu));
 		lu = new LightUnit("sleeping_light");
 		rooms.get(2).gestures.add(new LightGesture(320, 160, 520, 360, lu));
+		lu = new LightUnit("sleeping_light",true);
+		rooms.get(2).gestures.add(new LightGesture(520, 160, 720, 360, lu));
 		lu = new LightUnit("lounge_light");
 		rooms.get(3).gestures.add(new LightGesture(320, 160, 520, 360, lu));
 		lu = new LightUnit("lounge_light",true);
 		rooms.get(3).gestures.add(new LightGesture(120, 160, 320, 360, lu));
-		lu = new LightUnit("corridor_light");
+		lu = new LightUnit("corridor_light",true);
 		rooms.get(4).gestures.add(new LightGesture(300, 180, 500, 380, lu));
-
+		
 		room = rooms.get(0);
 
 		lightGroup = new Gesture();

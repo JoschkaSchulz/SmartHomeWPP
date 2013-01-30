@@ -14,8 +14,8 @@ public class WindowUnit {
 
 	public void click(SmartHomeActivity activity, boolean isLong) {
 		if (isLong) {
-//			activity.wSlider.windowUnit = this;
-//			activity.wSlider.actionPerformed("enter", activity);
+			activity.wSlider.windowUnit = this;
+			activity.wSlider.actionPerformed("enter", activity);
 		} else {
 			System.out.println("Light "+(open ? "on" : "off"));
 			setOpen(!open);
@@ -33,7 +33,7 @@ public class WindowUnit {
 			//Brauchen wir evtl. oder evtl. nicht :D
 			//WindowController1:  172.16.0.10/24
 			//WindowController2:  172.16.0.11/24
-			send.execute("172.16.0.200", "12349", "WINDOW.CONTROL", "topic", JSONBuilder.window(action, (open ? cm : 0)));
+			send.execute("172.16.0.200", "61616", "WINDOW.CONTROL", "topic", JSONBuilder.window(action, (open ? cm : 0)));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
 			this.open = !open;

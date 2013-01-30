@@ -71,19 +71,23 @@ public class JSONBuilder {
 	
 	public static String window(String windowid, Integer position) {
 		
-		Map<String,String> valueMap = new HashMap<String, String>();
-//		if (on) valueMap.put("intensity",Integer.toString(intensity));
+		Map<String,Object> valueMap = new HashMap<String, Object>();
+		
+		//		if (on) valueMap.put("intensity",Integer.toString(intensity));
 		
 		Map<String,Object> aendernMap = new HashMap<String, Object>();
 		
 		JSONObject jsov = new JSONObject(valueMap);
 		
-		aendernMap.put("values", jsov);
-		aendernMap.put("Id", "client_1578909153");
-		aendernMap.put("Version", null);
+//		aendernMap.put("values", jsov);
+//		aendernMap.put("Id", "client_1578909153");
+//		aendernMap.put("Version", null);
 //		aendernMap.put("action", action + "" + open);
-		JSONArray jsoa = new JSONArray(Arrays.asList(new String[]{"FAST", position.toString()}));
-		aendernMap.put(windowid, jsoa );
+//		JSONArray jsoa = new JSONArray(Arrays.asList(new Integer[]{1,2,3}));
+//		aendernMap.put("anAry", jsoa );
+		JSONArray value = new JSONArray(Arrays.asList(new String[]{position.toString(), "FAST"}));
+		aendernMap.put(windowid, value );
+		
 		JSONObject msgFarbeEsszimmerAendern = new JSONObject(aendernMap);
 		return msgFarbeEsszimmerAendern.toString();
 	}
