@@ -20,8 +20,8 @@ public class WindowUnit {
 
 	public void click(SmartHomeActivity activity, boolean isLong) {
 		if (isLong) {
-			//activity.slider.lightUnit = this;
-			//activity.slider.actionPerformed("enter", activity);
+			activity.wSlider.windowUnit = this;
+			activity.wSlider.actionPerformed("enter", activity);
 		} else {
 			System.out.println("Light "+(open ? "on" : "off"));
 			setOpen(!open);
