@@ -36,7 +36,10 @@ public class WindowUnit {
 		
 		try {
 			sendMessageToProxy send = new sendMessageToProxy();
-			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, open, cm));
+			//Brauchen wir evtl. oder evtl. nicht :D
+			//WindowController1:  172.16.0.10/24
+			//WindowController2:  172.16.0.11/24
+			send.execute("172.16.0.200", "12349", "WINDOW.CONTROL", "topic", JSONBuilder.window(action, (open ? cm : 0)));
 		} catch(Exception e) {
 			System.out.println("Senden Fehlgeschlagen");
 			this.open = !open;
