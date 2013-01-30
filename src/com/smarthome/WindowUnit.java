@@ -4,18 +4,12 @@ package com.smarthome;
 public class WindowUnit {
 	public boolean open = false;
 	public int cm = 20;
-	public boolean isIntensity = false;
 	private String action;
 	
 	public WindowUnit() {}
 	
 	public WindowUnit(String action) {
 		this.action = action;
-	}
-
-	public WindowUnit(String action, boolean isIntensity) {
-		this.action = action;
-		this.isIntensity = isIntensity;
 	}
 
 	public void click(SmartHomeActivity activity, boolean isLong) {
