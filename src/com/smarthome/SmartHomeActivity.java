@@ -29,8 +29,10 @@ public class SmartHomeActivity extends RajawaliActivity implements
 	public LinkedList<Room> rooms;
 
 	public boolean isSlider = false;
+	public boolean isWSlider = false;
 	public boolean isDebug = false;
 	public SliderController slider;
+	public WindowController wSlider;
 	public DebugController debug;
 	public static int screenWidth;
 	public static int screenHeight;
@@ -214,6 +216,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 					;
 				else if (isSlider && mRenderer != null)
 					;
+				else if (isWSlider && mRenderer != null)
+					;
 				else if (room != null)
 					room.gesture(this, gestureStr);
 				return;
@@ -223,6 +227,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 				debug.fire(newX, newY, this, isLong);
 			else if (isSlider && mRenderer != null)
 				slider.fire(newX, newY, this, isLong);
+			else if (isWSlider && mRenderer != null)
+				wSlider.fire(newX, newY, this, isLong);
 			else if (room != null)
 				room.fire(newX, newY, this, isLong);
 		}
@@ -240,6 +246,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		debug = new DebugController(10f, 10f, 99, this);
 
 		slider = new SliderController(10f, 10f, 99, this);
+		wSlider = new WindowController(10f, 10f, 99, this);
 
 		rooms = new LinkedList<Room>();
 
