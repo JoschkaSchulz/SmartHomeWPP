@@ -6,6 +6,7 @@ public class LightUnit {
 	public int red = 255;
 	public int green = 255;
 	public int blue = 255;
+	public boolean isIntensity = false;
 	private String action;
 	
 	public LightUnit() {}
@@ -13,6 +14,12 @@ public class LightUnit {
 	public LightUnit(String action) {
 		this.action = action;
 	}
+
+	public LightUnit(String action, boolean isIntensity) {
+		this.action = action;
+		this.isIntensity = isIntensity;
+	}
+
 	public void click(SmartHomeActivity activity, boolean isLong) {
 		if (isLong) {
 			activity.slider.lightUnit = this;
@@ -31,6 +38,11 @@ public class LightUnit {
 		
 		try {
 			sendMessageToProxy send = new sendMessageToProxy();
+			if (isIntensity) {
+				send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, (red + green + blue) / 3));
+			} else {
+				send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
+			}
 			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on ? red : 0, on ? green : 0, on ? blue : 0, 0));	
 //			send.execute("172.16.0.200", "12349", "LP.LIGHTCONTROL", "topic", JSONBuilder.light(action, on, 255));
 		} catch(Exception e) {
@@ -47,6 +59,12 @@ public class LightUnit {
 		}
 	}
 	public void setColor(int red, int green, int blue) {
+		if (isIntensity) {
+			int intensity = (red + green + blue) / 3;
+			red = intensity;
+			green = intensity;
+			blue = intensity;
+		}
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
