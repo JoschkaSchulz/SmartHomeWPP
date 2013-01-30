@@ -119,22 +119,31 @@ public class SliderController extends Room implements ActionListener {
 	public void actionPerformed(String action, SmartHomeActivity activity, float x, float y) {
 		if (lightUnit == null) return;
 		boolean colorSet = false;
+		int intensity = 0;
 		if (action.equals("red")) {
-			lightUnit.red = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.red = intensity = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
 			moveSlider(0, lightUnit.red, gestures.get(5), activity);
 		}
 		if (action.equals("green")) {
-			lightUnit.green = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.green = intensity = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
 			moveSlider(1, lightUnit.green, gestures.get(6), activity);
 		}
 		if (action.equals("blue")) {
-			lightUnit.blue = (int)((x - minx) * 255 / (maxx - minx));
+			lightUnit.blue = intensity = (int)((x - minx) * 255 / (maxx - minx));
 			colorSet = true;
 			moveSlider(2, lightUnit.blue, gestures.get(7), activity);
 		}
 		if (colorSet) {
+			if (lightUnit.isIntensity) {
+				lightUnit.red = intensity;
+				lightUnit.green = intensity;
+				lightUnit.blue = intensity;
+				moveSlider(0, lightUnit.red, gestures.get(5), activity);
+				moveSlider(1, lightUnit.green, gestures.get(6), activity);
+				moveSlider(2, lightUnit.blue, gestures.get(7), activity);
+			}
 			if (accessMode == 2) {
 				activity.lightGroup.imitate(activity, activity.lightGroup, "setColor", new int[]{lightUnit.red, lightUnit.green, lightUnit.blue});
 				activity.lightGroup.imitate(activity, activity.lightGroup, "setLight", new int[]{1});
