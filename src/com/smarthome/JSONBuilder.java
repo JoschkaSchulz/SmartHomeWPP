@@ -68,4 +68,23 @@ public class JSONBuilder {
 		JSONObject msgFarbeEsszimmerAendern = new JSONObject(aendernMap);
 		return msgFarbeEsszimmerAendern.toString();
 	}
+	
+	public static String window(String windowid, Integer position) {
+		
+		Map<String,String> valueMap = new HashMap<String, String>();
+//		if (on) valueMap.put("intensity",Integer.toString(intensity));
+		
+		Map<String,Object> aendernMap = new HashMap<String, Object>();
+		
+		JSONObject jsov = new JSONObject(valueMap);
+		
+		aendernMap.put("values", jsov);
+		aendernMap.put("Id", "client_1578909153");
+		aendernMap.put("Version", null);
+//		aendernMap.put("action", action + "" + open);
+		JSONArray jsoa = new JSONArray(Arrays.asList(new String[]{"FAST", position.toString()}));
+		aendernMap.put(windowid, jsoa );
+		JSONObject msgFarbeEsszimmerAendern = new JSONObject(aendernMap);
+		return msgFarbeEsszimmerAendern.toString();
+	}
 }
