@@ -331,6 +331,8 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		rooms.get(2).gestures.add(new LightGesture(320, 160, 520, 360, lu));
 		lu = new LightUnit("lounge_light");
 		rooms.get(3).gestures.add(new LightGesture(320, 160, 520, 360, lu));
+		lu = new LightUnit("lounge_light",true);
+		rooms.get(3).gestures.add(new LightGesture(120, 160, 320, 360, lu));
 		lu = new LightUnit("corridor_light");
 		rooms.get(4).gestures.add(new LightGesture(300, 180, 500, 380, lu));
 
@@ -357,7 +359,7 @@ public class SmartHomeActivity extends RajawaliActivity implements
 		cu = new CurtainUnit("blinds_lounge");
 		rooms.get(7).gestures.add(new CurtainGesture(410, 200, 510, 300, cu));
 
-		cu = new CurtainUnit("blinds_sleeping");
+		cu = new CurtainUnit("blinds"); //Schlafzimmer spinnt ein wenig... nicht blinds_sleeping verwenden -.-
 		rooms.get(8).gestures.add(new CurtainGesture(700, 210, 800, 310, cu));
 
 		initializationState |= 2;
