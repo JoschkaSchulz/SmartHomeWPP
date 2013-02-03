@@ -9,6 +9,21 @@ import org.json.JSONObject;
 
 public class JSONBuilder {
 	
+	//*******************************************
+	//**		Methods
+	//*******************************************
+	
+	/**
+	 * This method buid a JSON string for the activeMQ. It is used
+	 * for controlling the colored lights
+	 * 
+	 * @param action the action wich should be used
+	 * @param red the red color 0 - 255
+	 * @param green the green color 0 - 255
+	 * @param blue the blue color 0 - 255
+	 * @param fadetime the time the lights fade on or off
+	 * @return a JSON string for the activeMQ
+	 */
 	public static String light(String action, int red, int green, int blue, int fadetime) {
 		
 		Map<String,String> valueMap = new HashMap<String, String>();
@@ -31,6 +46,14 @@ public class JSONBuilder {
 		return msgFarbeEsszimmerAendern.toString();
 	}
 	
+	/**
+	 * This method buid a JSON string for the activeMQ. It is used
+	 * for controlling the intensity lights
+	 * @param action the action that should be used
+	 * @param on true turns it on and false off
+	 * @param intensity the intensity the lights shine
+	 * @return a JSON string for the activeMQ
+	 */
 	public static String light(String action, boolean on, int intensity) {
 		
 		Map<String,String> valueMap = new HashMap<String, String>();
@@ -50,6 +73,14 @@ public class JSONBuilder {
 		return msgFarbeEsszimmerAendern.toString();
 	}
 	
+	/**
+	 * This method buid a JSON string for the activeMQ. It is used
+	 * for controlling the curtain and blinds.
+	 * 
+	 * @param action the action that should be used
+	 * @param open true opens the curtains and false closed them
+	 * @return a JSON string for the activeMQ
+	 */
 	public static String curtain(String action, boolean open) {
 		
 		Map<String,String> valueMap = new HashMap<String, String>();
@@ -69,6 +100,14 @@ public class JSONBuilder {
 		return msgFarbeEsszimmerAendern.toString();
 	}
 	
+	/**
+	 * (experimental method)
+	 * This method buid a JSON string for the activeMQ. It is used
+	 * for controlling the windows.
+	 * @param windowid the window id wich should be used
+	 * @param position the position of the window 0 - 20
+	 * @return a JSON string for the activeMQ
+	 */
 	public static String window(String windowid, Integer position) {
 		
 		Map<String,Object> valueMap = new HashMap<String, Object>();
