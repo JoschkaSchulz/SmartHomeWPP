@@ -32,7 +32,10 @@ public class LightGesture extends Gesture {
 		return super.toString() + lightUnit.toString();
 	}
 	public void appear(SmartHomeActivity activity) {
-		createSample(R.drawable.lamp, activity);
+		if (lightUnit.isIntensity)
+			createSample(R.drawable.lamp, activity);
+		else
+			createSample(R.drawable.lamp, activity);
 		activity.imagePane.addView(images.get(0));
 	}
 	public void disappear(SmartHomeActivity activity) {
